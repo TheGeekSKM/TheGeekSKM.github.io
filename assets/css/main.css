@@ -188,7 +188,7 @@ input, select, textarea {
 			text-decoration: none;
 		}
 
-		h1.major, h2.major, h3.major, h4.major, h5.major, h6.major {
+		h1.major, h3.major, h4.major, h5.major, h6.major {
 			border-bottom: solid 5px #f1c70a;
 			width: -moz-max-content;
 			width: -webkit-max-content;
@@ -196,6 +196,16 @@ input, select, textarea {
 			width: max-content;
 			padding-bottom: 0.1rem;
 			margin: 0 0 2rem 0;
+		}
+
+		h2.major {
+			border-bottom: solid 3px #f1c70a;
+			width: -moz-max-content;
+			width: -webkit-max-content;
+			width: -ms-max-content;
+			width: max-content;
+			padding-bottom: 0.1rem;
+			margin: 0 0 1.5rem 0;
 		}
 
 	h1 {

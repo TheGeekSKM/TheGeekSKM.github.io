@@ -87,8 +87,60 @@ class Projectile {
     }
 }
 
+class Invader {
+    constructor() {
+
+        this.speed = 5;
+        this.tilt = 0.15;
+        
+        // sets velocity of player
+        this.velocity = {
+            x: 0,
+            y: 0
+        };
+        
+        const image = new Image();
+        image.src = "./img/invader.png";
+        
+        image.onload = () => {
+            
+            const scale = 0.3;
+            this.image = image;
+            this.width = image.width * scale;
+            this.height = image.height * scale;
+            
+            // sets position of player
+            this.position = {
+                x: canvas.width / 2 - this.width / 2,
+                y: canvas.height / 2 - this.height / 2
+            };
+        };
+    }
+
+    Draw() {
+
+        if (this.image) {
+            ctx.fillStyle = "red";
+            // ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+            ctx.drawImage(this.image, this.position.x, this.position.y, this.width, this.height);
+            
+        }
+
+    }
+
+    Update() {
+        
+        if (this.image) {
+            this.Draw();
+            this.position.x += this.velocity.x;
+            this.position.y += this.velocity.y;
+        }
+    }
+}
+
 const player = new Player();
 const projectiles = [];
+const invader = new Invader();
 
 const keys = {
     a: {
@@ -110,6 +162,7 @@ function GameUpdate() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
     player.Update();
+    invader.Update();
 
     projectiles.forEach((projectile, index) => {
         

@@ -1,11 +1,8 @@
 @import url(fontawesome-all.min.css);
 @import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400';
 
-/*
-	Stellar by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
+
+/* bought website template from pixelarity */
 
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
@@ -2808,15 +2805,15 @@ input, select, textarea {
 		-ms-justify-content: center;
 		justify-content: center;
 		width: calc(100% + 2em);
-		margin: 0 0 3em -2em;
+		margin: 0 0 3em -4em;
 		padding: 0;
 		list-style: none;
 	}
 
 		.features li {
 			width: calc(33.33333% - 2em);
-			margin-left: 2em;
-			margin-top: 3em;
+			margin-left: 5em;
+			margin-top: 5em;
 			padding: 0;
 		}
 

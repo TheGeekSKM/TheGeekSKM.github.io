@@ -1,0 +1,126 @@
+.work__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 5em;
+}
+
+.work__content strong {
+    /* inherit base text color */
+    color: inherit;
+}
+
+.work__card {
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+
+    transition: all 0.5s ease;
+}
+
+.work__card:hover strong {
+    transition: all 0.2s ease;
+    color: var(--color-indigo);
+}
+
+.work__card:hover h3 {
+    transition: all 0.2s ease;
+    color: var(--color-indigo);
+}
+
+.work__card:hover .work__date {
+    transition: all 0.2s ease;
+    color: var(--color-indigo);
+}
+
+.work__card:hover .work__img {
+    transition: all 0.2s ease;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(74, 222, 128, 0.15), 0 6px 6px rgba(74, 222, 128, 0.15),
+        0 0 100px -10px var(--color-indigo);
+}
+
+.work__title {
+    font-size: var(--size-xxl);
+    color: var(--color-light);
+
+    font-weight: 600;
+    line-height: 0.9;
+}
+
+.work__date {
+    font-size: var(--size-sm);
+    color: var(--color-stone800);
+    margin-bottom: 1em;
+}
+
+.work__description {
+    font-size: var(--size-sm);
+    color: var(--color-stone600);
+}
+
+.work__img {
+    min-width: 20rem;
+    max-width: 20rem;
+    border-radius: 0.5em;
+    margin-top: 0.5em;
+}
+
+/* xs */
+@media (min-width: 475px) {
+
+    
+
+    .work__title {
+        font-size: var(--size-3xl);
+    }
+
+    .work__date {
+        font-size: var(--size-base);
+    }
+
+    .work__description {
+        font-size: var(--size-base);
+    }
+}
+
+/* smal; */
+@media (min-width: 640px) {
+    .work__card {
+        display: flex;
+        flex-direction: row;
+        gap: 1em;
+        align-items: center;
+    }
+}
+
+
+/* large */
+@media (min-width: 1024px) {
+    .work__content {
+        gap: 3rem;
+    }
+
+    .work__card {
+        flex-direction: row;
+        gap: 1em;
+    }
+
+    .work__img {
+        min-width: 25rem;
+        max-width: 25rem;
+    }
+
+    .work__title {
+        font-size: var(--size-4xl);
+    }
+
+    .work__date {
+        font-size: var(--size-lg);
+    }
+
+    .work__description {
+        font-size: var(--size-lg);
+    }
+}

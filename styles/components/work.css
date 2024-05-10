@@ -34,7 +34,7 @@
     color: var(--color-indigo);
 }
 
-.work__card:hover .work__img {
+.work__img:hover {
     transition: all 0.2s ease;
     transform: scale(1.05);
     box-shadow: 0 10px 20px rgba(74, 222, 128, 0.15), 0 6px 6px rgba(74, 222, 128, 0.15),

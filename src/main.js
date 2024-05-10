@@ -16,7 +16,9 @@ import '../styles/utils.css';
 import mobileNavigation from './utils/mobile-nav';
 import darkMode from './utils/dark-mode';
 import topButton from './utils/top-button';
+import lazyLoading from './utils/lazy-loading';
 
 mobileNavigation();
 darkMode();
 topButton();
+lazyLoading();

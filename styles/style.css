@@ -46,6 +46,17 @@ html {
     --color-stone800: #262626;
 }
 
+.light-mode strong {
+    color: var(--color-light);
+    /* shadow beneath text */
+    /* text-shadow: 0 0 4px var(--color-stone400); */
+}
+
+.light-mode a {
+    color: var(--color-stone400);
+    font-weight: bold;
+}
+
 body {
     font-family: 'Alpino', sans-serif;
     background-color: var(--color-dark);

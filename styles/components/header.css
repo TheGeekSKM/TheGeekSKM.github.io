@@ -19,6 +19,14 @@
     display: block;
 }
 
+.hero__button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2em;
+    width: 20em;
+}
+
 /* xs */
 @media (min-width: 475px) {
     
@@ -26,7 +34,10 @@
 
 /* smal; */
 @media (min-width: 640px) {
-    
+    .hero__button-container {
+        flex-direction: row;
+        width: auto;
+    }
 }
 
 /* med */
@@ -67,7 +78,7 @@
     }
     
     .header__resume {
-        font-size: var(--size-xs);
+        font-size: var(--size-sm);
     }
 
     .header__bars {
@@ -89,7 +100,7 @@
     }
     
     .header__resume {
-        font-size: var(--size-sm);
+        font-size: var(--size-base);
     }
 }
 

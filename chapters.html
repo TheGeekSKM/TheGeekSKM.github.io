@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chapters</title>
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a> | 
+        <a href="/chapters">Chapters</a>
+    </nav>
+
+    <h1>Chapters</h1>
+    <ul>
+        {% for chapter in site.chapters %}
+            <li><a href="{{ chapter.url }}">{{ chapter.title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

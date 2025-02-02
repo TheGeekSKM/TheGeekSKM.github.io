@@ -1,0 +1,6 @@
+title: "A Matter of Perspective"
+collections:
+  chapters:
+    output: true
+    permalink: /chapters/:name/
+    

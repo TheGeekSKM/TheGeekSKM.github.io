@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Novel Reader</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <h1 id="novel-title"></h1>
+    <nav id="chapter-list">
+        <!-- Chapter links will be loaded here -->
+    </nav>
+    <article id="content">Select a chapter to read.</article>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const novelName = urlParams.get('novel');
+        
+        let chapterIndex = 1;
+        const chapters = ["chapter-1.md", "chapter-2.md"]; // Later, fetch dynamically
+
+        if (!novelName) {
+            document.getElementById('novel-title').innerText = "No novel selected.";
+        } else {
+            document.getElementById('novel-title').innerText = `📖 ${novelName.replace("-", " ")}`;
+            // change the title of the page to the novel name
+            document.title = novelName.replace("-", " ");
+            // Load the first chapter of the novel
+            loadChapterReal(novelName, "chapter-1.md");
+            
+            // Fetch and display the list of chapters dynamically
+            const chapterList = document.getElementById('chapter-list');
+
+            chapters.forEach(chapter => {
+                const link = document.createElement('a');
+                link.href = "#";
+                link.innerText = chapter.replace(".md", "").replace("-", " ");
+                link.onclick = () => loadChapterReal(novelName, chapter);
+                chapterList.appendChild(link);
+                chapterList.appendChild(document.createElement('br'));
+            });
+        }
+
+        function loadNextChapter() {
+            chapterIndex++;
+            loadChapterReal(novelName, `chapter-${chapterIndex}.md`);
+        }
+
+        function loadPreviousChapter() {
+            chapterIndex--;
+            loadChapterReal(novelName, `chapter-${chapterIndex}.md`);
+        }
+
+        function loadChapterReal(novel, chapter) {
+            fetch(`src/novels/${novel}/${chapter}`)
+                .then(response => response.text())
+                .then(text => {
+                    let content;
+                    let nextChapter = null;
+                    
+                    try {
+                        const parsed = matter(text); // Try to parse front matter
+                        content = parsed.content;
+                        nextChapter = parsed.data.next || null;
+                        document.title = parsed.data.title || "Web Novel";
+                    } catch (err) {
+                        console.warn("No front matter found, loading as plain Markdown.");
+                        content = text; // Use raw text if parsing fails
+                    }
+        
+                    document.getElementById('book-content').innerHTML = marked.parse(content);
+
+                    if (chapterIndex + 1 > chapters.length) {
+                        const nextButton = document.getElementById('next-button');
+                        nextButton.innerText = "Previous Chapter";
+                        nextButton.onclick = loadPreviousChapter;
+                    } else {
+                        const nextButton = document.getElementById('next-button');
+                        nextButton.innerText = "Next Chapter";
+                        nextButton.onclick = loadNextChapter;
+                    }
+                })
+                .then(() => {
+                    window.location.hash = chapter;
+                })
+                .then(() => {
+                    setTimeout(() => {
+                        window.scrollTo(0, 0);
+                    }, 50); // Small delay to ensure rendering happens before scroll
+                })
+                .catch(err => console.error('Error loading chapter:', err));
+
+            
+        }
+        
+        
+        
+    </script>
+</body>
+    <div id="book-content"></div>
+    <button id="next-button"></button>
+    <script type="module" src="./src/main.js"></script>
+</html>

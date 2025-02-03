@@ -1,0 +1,35 @@
+### Chapter 10
+
+Solomon stumbled out of the castle, covered in the blood and guts of the boy. He held both swords in his hands and limped his way into town. He could feel all the eyes of the villagers staring him down. He just kept shuffling. He could feel murderous hatred staring him down. He looked at his audience and saw horrors in their eyes.
+
+Hatred. Malice. Death.
+
+He kept shuffling.
+
+Eventually, his knees gave out as he reached the stables. He fell against the wall of the stable and frantically began searching his pockets. When he reached in, he felt the jagged glass-a result of the previous clash. Luckily, he found a single unbroken vial amidst the collection of shattered leaking potions, all former healing potions now coalescing to various poisonous substances. 
+
+He pulled out the single vial and shuddered as the liquid entered his throat. His body was racked with a terrible itching sensation as his wounds willed themselves closer. His skin grew at a feverish rate and Solomon had to resist-with tremendous force-the urge the slit his throat to ease the itching. Instead, he lumbered over to Wyrm and unhooked him from the stables. He tripped and almost fell into the muddy floor, until Wyrm caught him with his head. Wyrm stood still until Solomon reoriented himself and snorted to tell Solomon to be careful. Solomon actually had no idea what Wyrm was probably saying with that snort, but he nodded anyway.
+
+"Hey...you're gonna hafta pay for that," the stable hand croaked.
+
+Solomon turned towards him and just growled. He reached into his satchel and threw the stable hand a few gold pieces, his hands shivering and still bleeding. The stable hand picked up the coins and walked over to Solomon, who was now struggling to say on his feet. The stable hand reared back and socked Solomon in the jaw, causing Solomon's head to rattle with pain.
+
+"I need some respect from ya, fucking outsider," the stable hand grumbled.
+
+Wyrm whinnied angrily. Wyrm was not going do anything, but he probably felt it was important to warn the stable hand. Solomon, however, did not believe in warnings. He lurched forward and put his right foot behind the stable hand's feet. He used his right hand to slam the hilt of his blade into the stable hand's nose. The impact caused the stable hand to fall back. At the same time, Solomon pulled his right leg back, causing the stable hand to trip back, slam his head into the walls of the stable, and fall unconscious. Solomon struggled to stand up straight and just glared. He could hear the footsteps of a man to his left running towards him. He glanced over and quickly observed a larger man, wearing peasant garb racing towards him. He estimated that the man would have a hard time slowing down, but his intent was not to do so. Instead, the peasant was probably going to attempt to slam him into the ground and grapple him. While Solomon calculated this, a fraction of a second passed. Solomon raised his left hand and leveled his sword to greet the peasant. He dipped the tip of his blade to be slightly lower than the hilt. As the man ran into his sword, unable to slow down fast enough to avoid it, the dipped angle of the sword allowed it to miss any vital organs and only pierce flesh. The peasant screamed.
+
+Several more peasants ran towards him. Solomon gritted his teeth. He growled at his circumstances. He realized that he could not talk to these creatures like he did to Erowyn. Unlike Erowyn, these animals do not listen to reason. Solomon shifted his weight and leaned forward with his left foot, his hands and swords outstretched. After placing his left firmly into the ground, Solomon used his right foot to spin himself around. The swords sung as they flew in the air and screamed as their pierced flesh. The three or so peasants that rushed Solomon fell back, blood streaming down their faces. One of them lost an eye, while the others simply will wear a menacing scar for the rest of their lives. Solomon knew that silent yet flashy attacks would just invite more excited villagers so he turned to the one who lost his eye, leaned over him, and with all the strength in his body, roared.
+
+Solomon looked around and roared again. For a moment, a wild unimaginable rage soared through his veins until the exhaustion followed it. It worked, however. The feral screams caused the villagers to step back and reassess their next moves.
+
+"GET OUT OF OUR TOWN, YOU FUCKING MONSTER!!"
+
+Solomon lost control. This only happened to him a few times, but this was one of those times. He dropped his swords, wrapped his fingers around the collar of the villager who screamed at him, dragged him against the outer wall of the stable, and slammed her against the wall until blood poured from the her nose. He let go and looked at her with a hint of recognition. It was the red-haired woman that he first met in town. His face dropped. The woman stared at him in shock as he held up his hands in a apologetic pose. He lurched back and held Wyrm's reins, noticed that Wyrm managed to subdue another villager with his hooves, and let Wyrm lead him out of town. No one stopped him.
+
+After about ten minutes out of town, Solomon slumped against a tree. He loosely held onto Wyrm's reins before dropping them. Wyrm looked at him quizzically. Solomon attempted to tell Wyrm to leave him and run away from him, but words did not come out. Instead, Solomon gurgled as tears appeared in his eyes. Instead of speaking, he waved for Wyrm to run away. Wyrm never did. Instead, Wyrm sat against the tree and laid his head in Solomon's lap. Solomon held him and cried. Over the years, Solomon trained himself to cry silently. No one was to ever know that Solomon had the ability to shed tears. But this time, he didn't care. All he saw when he closed is eyes, were the eyes of a boy who trusted him. He heard the boy tell him that he is a bad person, and he cried.
+
+After a few moments, Solomon stopped. He heard something. In fact, he heard it about seven minutes ago. A humanoid creature with wings was trailing him. Solomon even managed to catch a glimpse of the creature. He saw golden yellow wings. Now, it seemed the creature landed. It was stalking him. Solomon normally could tell if a creature was hungry or intrigued based on the weight and sound of its footstep, but right now he didn't care. He sat back and stared ahead for a moment, before looking at Wyrm. Wyrm recognized the look and-as he was taught-did not move. Solomon moved his hand to his hat, pivoted, and rested his hand on his sword. 
+
+The wind howled. The snow rained down. The lakes froze over and over again. The world was covered in a blanket of white snow, making everything else seem pitch black in contrast. The smell of fresh snow and dirt permeated the woods. 
+
+Solomon grabbed his sword, he gritted his teeth, and he leapt forward.

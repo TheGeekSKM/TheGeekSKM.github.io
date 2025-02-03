@@ -24,23 +24,101 @@
     opacity: 1;
 }
 
-#book-content {
-    max-width: 1650px;
-    margin: 0 auto;
+#chapter-list {
+    display: none;
+}
+
+/* Chapter Dropdown */
+#chapter-dropdown-container {
+    text-align: center;
+    margin: 1rem auto;
+}
+
+#chapter-dropdown {
+    width: 90%;
+    max-width: 300px;
+    padding: 0.75rem;
+    font-size: var(--size-lg);
+    font-weight: 500;
+    background: var(--color-dark);
+    color: var(--color-rose);
+    border: 2px solid var(--color-rose);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#chapter-dropdown:hover {
+    background: var(--color-dark);
+    color: var(--color-light);
+}
+
+/* Book Title */
+#novel-title {
+    text-align: center;
+    font-size: var(--size-6xl);
+    font-weight: bold;
+    color: var(--color-indigo);
+    margin-top: 2rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Chapter List */
+#chapter-list {
+    list-style: none;
     padding: 1rem;
+    text-align: center;
+    margin: 2rem auto;
+    background: var(--color-dark);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Chapter List Items */
+#chapter-list a {
+    display: block;
+    text-decoration: none;
+    color: var(--color-rose);
+    font-size: var(--size-lg);
+    font-weight: 500;
+    padding: 0.75rem;
+    transition: color 0.3s, background 0.3s, transform 0.2s;
+    border-radius: 5px;
+}
+
+/* Hover Effect */
+#chapter-list a:hover {
+    background: var(--color-indigo);
+    color: var(--color-light);
+    transform: scale(1.05);
+}
+
+/* Spacing for Book Content */
+#book-content {
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Paragraph Styling */
+#book-content p {
+    font-size: var(--size-base);
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    padding: 0.75rem;
+    text-align: justify;
+    text-indent: 2em;
 }
 
 #book-content h3 {
-    font-size: var(--size-5xl);
-    margin-bottom: 1rem;
-    color: var(--color-rose);
     text-align: center;
-}
-
-#book-content p{
-    padding: 1rem;
-    line-height: 1.6;
-    margin-bottom: 5px;
+    font-size: var(--size-3xl);
+    font-weight: bold;
+    color: var(--color-indigo);
+    margin: 1.5rem 0;
 }
 
 /* xs */
@@ -49,29 +127,27 @@
         max-width: 300px;
     }
 
-    #book-content h3 {
+    #novel-title {
         font-size: var(--size-4xl);
     }
 
-    #book-content p{
-        padding: 0.5rem;
-        line-height: 1.4;
+    #chapter-list {
+        max-width: 300px;
     }
 }
 
-/* smal; */
+/* sm */
 @media (min-width: 640px) {
     #book-content {
         max-width: 500px;
     }
 
-    #book-content h3 {
+    #novel-title {
         font-size: var(--size-5xl);
     }
 
-    #book-content p{
-        padding: 1rem;
-        line-height: 1.6;
+    #chapter-list {
+        max-width: 400px;
     }
 }
 
@@ -81,13 +157,12 @@
         max-width: 600px;
     }
 
-    #book-content h3 {
+    #novel-title {
         font-size: var(--size-6xl);
     }
 
-    #book-content p{
-        padding: 1rem;
-        line-height: 1.6;
+    #chapter-list {
+        max-width: 500px;
     }
 }
 
@@ -97,9 +172,8 @@
         max-width: 900px;
     }
 
-    #book-content p{
-        padding: 1rem;
-        line-height: 1.6;
+    #chapter-list {
+        max-width: 700px;
     }
 }
 
@@ -109,9 +183,8 @@
         max-width: 1100px;
     }
 
-    #book-content p{
-        padding: 1rem;
-        line-height: 1.6;
+    #chapter-list {
+        max-width: 850px;
     }
 }
 
@@ -121,8 +194,49 @@
         max-width: 1400px;
     }
 
-    #book-content p{
-        padding: 1rem;
-        line-height: 1.6;
+    #chapter-list {
+        max-width: 1000px;
+    }
+}
+
+/* xs */
+@media (min-width: 475px) {
+    #chapter-dropdown {
+        max-width: 250px;
+    }
+}
+
+/* sm */
+@media (min-width: 640px) {
+    #chapter-dropdown {
+        max-width: 300px;
+    }
+}
+
+/* med */
+@media (min-width: 768px) {
+    #chapter-dropdown {
+        max-width: 350px;
+    }
+}
+
+/* large */
+@media (min-width: 1024px) {
+    #chapter-dropdown {
+        max-width: 400px;
+    }
+}
+
+/* xlarge */
+@media (min-width: 1280px) {
+    #chapter-dropdown {
+        max-width: 450px;
+    }
+}
+
+/* xxlarge */
+@media (min-width: 1536px) {
+    #chapter-dropdown {
+        max-width: 500px;
     }
 }

@@ -7,17 +7,35 @@
 </head>
 <body>
     <h1 id="novel-title"></h1>
-    <nav id="chapter-list">
-        <!-- Chapter links will be loaded here -->
-    </nav>
-    <article id="content">Select a chapter to read.</article>
+    <div id="chapter-dropdown-container">
+        <select id="chapter-dropdown">
+            <!-- Chapter options will be inserted here -->
+        </select>
+    </div>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const novelName = urlParams.get('novel');
-        
         let chapterIndex = 1;
-        const chapters = ["chapter-1.md", "chapter-2.md"]; // Later, fetch dynamically
+        let chapterMaxCount = 1;
+
+        // get the metadata.json file from the novels/novelName folder
+        fetch(`novels/${novelName}/metadata.json`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('novel-title').innerText = `📖 ${data.bookName}`;
+                // change the title of the page to the novel name
+                document.title = data.bookName;
+                chapterMaxCount = data.chapterCount;
+            })
+            .catch(err => {
+                console.error('Error loading metadata:', err);
+            });
+        
+        // get the chapter-num.md files from the novels/novelName folder
+        const chapters = Array.from({ length: 10 }, (_, i) => `chapter-${i + 1}.md`);
+        
+        
 
         if (!novelName) {
             document.getElementById('novel-title').innerText = "No novel selected.";
@@ -29,15 +47,22 @@
             loadChapterReal(novelName, "chapter-1.md");
             
             // Fetch and display the list of chapters dynamically
-            const chapterList = document.getElementById('chapter-list');
+            const chapterDropdown = document.getElementById("chapter-dropdown");
 
-            chapters.forEach(chapter => {
-                const link = document.createElement('a');
-                link.href = "#";
-                link.innerText = chapter.replace(".md", "").replace("-", " ");
-                link.onclick = () => loadChapterReal(novelName, chapter);
-                chapterList.appendChild(link);
-                chapterList.appendChild(document.createElement('br'));
+            // Populate the dropdown with chapters
+            chapters.forEach((chapter, index) => {
+                const option = document.createElement("option");
+                option.value = chapter;
+                option.innerText = `Chapter ${index + 1}`;
+                chapterDropdown.appendChild(option);
+            });
+
+            // Load the first chapter by default
+            loadChapterReal(novelName, chapters[0]);
+
+            // Handle chapter selection change
+            chapterDropdown.addEventListener("change", function () {
+                loadChapterReal(novelName, this.value);
             });
         }
 

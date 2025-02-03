@@ -52,7 +52,7 @@
         }
 
         function loadChapterReal(novel, chapter) {
-            fetch(`src/novels/${novel}/${chapter}`)
+            fetch(`novels/${novel}/${chapter}`)
                 .then(response => response.text())
                 .then(text => {
                     let content;

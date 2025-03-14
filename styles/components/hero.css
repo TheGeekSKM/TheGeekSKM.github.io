@@ -23,7 +23,7 @@
 
 .hero__title {
     color: var(--color-stone400);
-    font-size: var(--size-xxl);
+    font-size: var(--size-7xl);
     letter-spacing: -0.05em;
     line-height: 0.9;
     font-weight: 600;
@@ -52,12 +52,12 @@
     }
     
     .hero__subtitle {
-        font-size: var(--size-lg);
+        font-size: var(--size-xxl);
         font-weight: 600;
     }
     
     .hero__title {
-        font-size: var(--size-6xl);
+        font-size: var(--size-4xl);
     }
     
     .hero__description {
@@ -116,12 +116,12 @@
     }
     
     .hero__subtitle {
-        font-size: var(--size-4xl);
+        font-size: var(--size-xxl);
         font-weight: 600;
     }
     
     .hero__title {
-        font-size: var(--size-9xl);
+        font-size: var(--size-7xl);
     }
     
     .hero__description {

@@ -23,7 +23,7 @@
 
 .hero__title {
     color: var(--color-stone400);
-    font-size: var(--size-4xl);
+    font-size: var(--size-xxl);
     letter-spacing: -0.05em;
     line-height: 0.9;
     font-weight: 600;

@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [
     prismjs({
       languages: ['csharp', 'javascript'],
-      plugins: ['line-numbers', 'copy-to-clipboard','line-numbers', 'line-highlight'],
+      plugins: ['line-numbers', 'copy-to-clipboard', 'line-highlight'],
       theme: 'github-dark',
       css: true,
     })

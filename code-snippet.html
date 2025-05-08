@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# Code Snippets - Digital Nexus (Variable Scale)</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@4.2.1/index.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+    <style>
+        :root {
+            /* --- SCALING FACTOR --- */
+            --scale-factor: 0.75; 
+            /* --- END SCALING FACTOR --- */
+
+            /* Digital Nexus Color Palette (Enhanced Gold Accents) */
+            --color-bg-primary: #0A0F1E;       /* Very dark, deep space blue */
+            --color-bg-secondary: #10182F;     /* Slightly lighter blue for cards/surfaces */
+            --color-bg-tertiary: #1A2340;      /* Accent surface, e.g., snippet header */
+
+            --color-text-primary: #E1E8FF;     /* Bright, slightly cool white for main text */
+            --color-text-secondary: #A0A8C8;   /* Muted lavender-grey for secondary text */
+            --color-text-code: #C0D0FF;        /* Text color specifically for code inside pre */
+            --color-title-primary: #FFFFFF;    /* Pure white for main title for max contrast */
+            --color-title-secondary: #E1E8FF;  /* Bright white for snippet titles */
+
+            --color-border-primary: #2A3B6F;   /* Primary border, more visible */
+            --color-border-accent: #FFC107;    /* Mango gold border accent */
+            --color-header-accent-line: var(--color-accent-mango-gold); /* Mango Gold for snippet header line */
+
+            --color-accent-mango-gold: #FFC107; /* Vibrant Mango Gold - for key interactions */
+            --color-accent-leaf-green: #4CAF50; /* Crisp Leaf Green - for feedback */
+            --color-accent-electric-blue: #00AFFF; /* Brighter blue - used sparingly */
+
+            --font-primary: 'Inter', sans-serif;
+            --font-display: 'Orbitron', sans-serif;
+            --font-code: 'Cascadia Code', 'Roboto Mono', monospace; /* Cascadia Code added */
+
+            /* Scaled Shadows */
+            --shadow-glow-gold: 0 0 calc(18px * var(--scale-factor)) rgba(255, 193, 7, 0.35), 0 0 calc(6px * var(--scale-factor)) rgba(255, 193, 7, 0.25);
+            --shadow-glow-green: 0 0 calc(15px * var(--scale-factor)) rgba(76, 175, 80, 0.3), 0 0 calc(5px * var(--scale-factor)) rgba(76, 175, 80, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-code); /* As per your provided CSS */
+            line-height: 1.7;
+            color: var(--color-text-primary);
+            background: linear-gradient(135deg, var(--color-bg-primary) 0%, #080B1A 100%);
+            padding: calc(25px * var(--scale-factor));
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: calc(1200px * var(--scale-factor));
+            margin: 0 auto;
+            padding: 0 calc(20px * var(--scale-factor));
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: calc(60px * var(--scale-factor));
+            padding-bottom: calc(25px * var(--scale-factor));
+            border-bottom: calc(2px * var(--scale-factor)) solid var(--color-accent-mango-gold);
+        }
+
+        header h1 {
+            font-family: var(--font-code); /* As per your provided CSS */
+            font-size: calc(3.2em * var(--scale-factor));
+            color: var(--color-title-primary);
+            letter-spacing: calc(1.5px * var(--scale-factor));
+            font-weight: 700;
+            text-shadow: none;
+        }
+
+        .snippet-entry {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border-primary); /* Min 1px */
+            border-radius: calc(12px * var(--scale-factor));
+            margin-bottom: calc(40px * var(--scale-factor));
+            box-shadow: 0 calc(10px * var(--scale-factor)) calc(30px * var(--scale-factor)) rgba(0,0,0,0.3), 0 0 0 1px var(--color-border-primary);
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+            overflow: hidden;
+        }
+
+        .snippet-entry:hover {
+            transform: translateY(calc(-5px * var(--scale-factor))) scale(1.01);
+            box-shadow: 0 calc(10px * var(--scale-factor)) calc(25px * var(--scale-factor)) rgba(0,0,0,0.3), var(--shadow-glow-gold), 0 0 0 1px var(--color-accent-mango-gold);
+        }
+
+        .snippet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: calc(18px * var(--scale-factor)) calc(24px * var(--scale-factor));
+            background-color: var(--color-bg-tertiary);
+            border-bottom: 1px solid var(--color-border-primary); /* Min 1px */
+            position: relative;
+        }
+        .snippet-header::before { /* Mango Gold top accent line */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: calc(3px * var(--scale-factor));
+            /* background: var(--color-header-accent-line); */ /* Kept commented as per your provided CSS */
+            opacity: 1;
+            /* box-shadow: var(--shadow-glow-gold); */ /* Kept commented as per your provided CSS */
+        }
+
+        .snippet-title {
+            font-family: var(--font-code); /* As per your provided CSS */
+            font-size: calc(1.5em * var(--scale-factor));
+            color: var(--color-title-secondary);
+            font-weight: 700;
+            letter-spacing: calc(0.5px * var(--scale-factor));
+            text-shadow: none;
+        }
+
+        .snippet-explanation {
+            font-size: calc(1em * var(--scale-factor)); /* Monitor readability */
+            color: var(--color-text-secondary);
+            padding: calc(18px * var(--scale-factor)) calc(24px * var(--scale-factor));
+            background-color: var(--color-bg-secondary);
+        }
+
+        .snippet-explanation code {
+          background-color: rgba(255, 193, 7, 0.15);
+          padding: calc(0.2em * var(--scale-factor)) calc(0.5em * var(--scale-factor));
+          margin: 0 calc(0.1em * var(--scale-factor));
+          border-radius: calc(4px * var(--scale-factor));
+          font-family: var(--font-code);
+          font-size: calc(0.9em); /* Relative to parent, so not directly scaling the 0.9em by factor again */
+          color: var(--color-accent-mango-gold);
+          border: 1px solid rgba(255, 193, 7, 0.4); /* Min 1px */
+        }
+
+        .code-block-wrapper {
+            position: relative;
+        }
+
+        pre {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-code);
+            padding: calc(20px * var(--scale-factor)) calc(24px * var(--scale-factor));
+            border-radius: 0 0 calc(10px * var(--scale-factor)) calc(10px * var(--scale-factor));
+            overflow-x: auto;
+            font-family: var(--font-code);
+            font-size: calc(0.9em * var(--scale-factor)); /* Monitor readability */
+            line-height: 1.6;
+            white-space: pre;
+            margin: 0;
+            border-top: 1px dashed var(--color-border-primary); /* Min 1px */
+        }
+
+        pre code.hljs {
+            display: block;
+            background: none !important;
+            padding: 0;
+            color: inherit;
+            font-family: var(--font-code);
+        }
+        /* Custom Highlight.js tokens */
+        .hljs-keyword { color: var(--color-accent-electric-blue) !important; font-weight: 500; }
+        .hljs-string { color: var(--color-accent-leaf-green) !important; }
+        .hljs-comment { color: #707A9A !important; font-style: italic;}
+        .hljs-title.class_, .hljs-title.function_ { color: var(--color-accent-mango-gold) !important; font-weight: 500;}
+        .hljs-number { color: var(--color-accent-mango-gold) !important; }
+        .hljs-property { color: var(--color-text-secondary) !important; }
+
+
+        /* Copy Button Styling */
+        .copy-button {
+            display: inline-flex;
+            align-items: center;
+            gap: calc(8px * var(--scale-factor));
+            background: linear-gradient(145deg, var(--color-bg-tertiary), var(--color-bg-secondary));
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-border-primary); /* Min 1px */
+            padding: calc(8px * var(--scale-factor)) calc(16px * var(--scale-factor));
+            font-size: calc(0.85em * var(--scale-factor)); /* Monitor readability */
+            font-weight: 500;
+            font-family: var(--font-code); /* As per your provided CSS */
+            border-radius: calc(6px * var(--scale-factor));
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 calc(2px * var(--scale-factor)) calc(5px * var(--scale-factor)) rgba(0,0,0,0.2);
+        }
+        .copy-button .copy-icon, .copy-button .copied-icon {
+            width: calc(16px * var(--scale-factor));
+            height: calc(16px * var(--scale-factor));
+            transition: opacity 0.2s ease;
+        }
+        .copy-button .copied-icon { display: none; }
+
+        .copy-button:hover {
+            background: linear-gradient(145deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+            color: var(--color-accent-mango-gold);
+            border-color: var(--color-accent-mango-gold);
+            box-shadow: 0 calc(4px * var(--scale-factor)) calc(10px * var(--scale-factor)) rgba(0,0,0,0.3), var(--shadow-glow-gold);
+            transform: translateY(calc(-2px * var(--scale-factor)));
+        }
+
+        .copy-button:active {
+            transform: translateY(0px);
+            box-shadow: 0 calc(2px * var(--scale-factor)) calc(5px * var(--scale-factor)) rgba(0,0,0,0.2);
+        }
+
+        .copy-button.copied {
+            color: var(--color-accent-leaf-green);
+            border-color: var(--color-accent-leaf-green);
+            box-shadow: 0 calc(2px * var(--scale-factor)) calc(5px * var(--scale-factor)) rgba(0,0,0,0.2), var(--shadow-glow-green);
+        }
+        .copy-button.copied .copy-icon { display: none; }
+        .copy-button.copied .copied-icon { display: inline-block; }
+
+
+        footer {
+            text-align: center;
+            margin-top: calc(80px * var(--scale-factor));
+            padding: calc(30px * var(--scale-factor)) 0;
+            font-size: calc(0.9em * var(--scale-factor)); /* Monitor readability */
+            color: var(--color-text-secondary);
+        }
+
+        footer a {
+            color: var(--color-accent-mango-gold);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+        }
+        footer a:hover {
+            color: var(--color-text-primary);
+            text-decoration: none;
+            text-shadow: 0 0 calc(8px * var(--scale-factor)) var(--color-accent-mango-gold);
+        }
+
+        /* Media Queries: Breakpoints remain absolute, internal values are scaled */
+        @media (max-width: 768px) {
+            body { padding: calc(15px * var(--scale-factor)); }
+            header h1 { font-size: calc(2.2em * var(--scale-factor)); }
+            .snippet-title { font-size: calc(1.25em * var(--scale-factor)); }
+            pre { font-size: calc(0.85em * var(--scale-factor)); padding: calc(16px * var(--scale-factor)); }
+            .copy-button { padding: calc(6px * var(--scale-factor)) calc(12px * var(--scale-factor)); font-size: calc(0.8em * var(--scale-factor)); }
+            .snippet-header { padding: calc(12px * var(--scale-factor)) calc(16px * var(--scale-factor)); }
+            .snippet-explanation { padding: calc(12px * var(--scale-factor)) calc(16px * var(--scale-factor)); font-size: calc(0.95em * var(--scale-factor)); }
+        }
+
+        @media (max-width: 480px) {
+            header h1 { font-size: calc(1.8em * var(--scale-factor)); }
+            .snippet-header { gap: calc(10px * var(--scale-factor)); } /* flex-direction: column still applies */
+            pre { font-size: calc(0.8em * var(--scale-factor)); }
+        }
+
+        ::-webkit-scrollbar {
+            width: calc(10px * var(--scale-factor));
+            height: calc(10px * var(--scale-factor));
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg-primary);
+            border-radius: calc(5px * var(--scale-factor));
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border-primary);
+            border-radius: calc(5px * var(--scale-factor));
+            border: calc(2px * var(--scale-factor)) solid var(--color-bg-primary);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent-mango-gold);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>C# // DIGITAL NEXUS</h1>
+    </header>
+
+    <main class="container">
+        <section class="snippet-entry">
+            <div class="snippet-header">
+                <h2 class="snippet-title">Core: Class Structure</h2>
+                <button class="copy-button" aria-label="Copy code to clipboard">
+                    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16"> <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2zM5 0h1a1 1 0 0 1 1 1v1H5a1 1 0 0 1-1-1V0a1 1 0 0 1 1-1z"/>
+                        <path d="M0 4a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2 0v10h7V4H2z"/>
+                    </svg>
+                    <svg class="copied-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                    <span class="button-text">Copy</span>
+                </button>
+            </div>
+            <p class="snippet-explanation">
+                Fundamental C# class definition illustrating properties (<code>FirstName</code>, <code>LastName</code>), a constructor, and a method (<code>GetFullName</code>) for basic object-oriented structure.
+            </p>
+            <div class="code-block-wrapper">
+                <pre><code class="language-csharp">
+using System;
+
+public class Person
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+
+    public Person(string firstName, string lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+    }
+
+    public string GetFullName()
+    {
+        return $"{FirstName} {LastName}";
+    }
+
+    public static void Main(string[] args)
+    {
+        Person person1 = new Person("John", "Doe");
+        Console.WriteLine($"Person: {person1.GetFullName()}"); // Output: Person: John Doe
+    }
+}
+                </code></pre>
+            </div>
+        </section>
+
+        <section class="snippet-entry">
+            <div class="snippet-header">
+                <h2 class="snippet-title">LINQ: Data Querying</h2>
+                 <button class="copy-button" aria-label="Copy code to clipboard">
+                    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2zM5 0h1a1 1 0 0 1 1 1v1H5a1 1 0 0 1-1-1V0a1 1 0 0 1 1-1z"/>
+                        <path d="M0 4a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2 0v10h7V4H2z"/>
+                    </svg>
+                    <svg class="copied-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                    <span class="button-text">Copy</span>
+                </button>
+            </div>
+            <p class="snippet-explanation">
+                Demonstrates Language-Integrated Query (LINQ) for filtering a <code>List&lt;int&gt;</code>. Selects even numbers and orders them, showcasing declarative data manipulation.
+            </p>
+            <div class="code-block-wrapper">
+                <pre><code class="language-csharp">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class LinqDataQuery
+{
+    public static void Main(string[] args)
+    {
+        List&lt;int&gt; numbers = new List&lt;int&gt; { 1, 5, 2, 8, 3, 7, 4, 6, 10, 9 };
+
+        var evenNumbersQuery = from num in numbers
+                               where num % 2 == 0
+                               orderby num
+                               select num;
+
+        Console.WriteLine("Filtered Even Numbers (Ascending):");
+        foreach (var number in evenNumbersQuery)
+        {
+            Console.Write($"{number} "); // Output: 2 4 6 8 10
+        }
+        Console.WriteLine();
+    }
+}
+                </code></pre>
+            </div>
+        </section>
+
+        <section class="snippet-entry">
+            <div class="snippet-header">
+                <h2 class="snippet-title">Async: Non-Blocking Ops</h2>
+                 <button class="copy-button" aria-label="Copy code to clipboard">
+                    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2zM5 0h1a1 1 0 0 1 1 1v1H5a1 1 0 0 1-1-1V0a1 1 0 0 1 1-1z"/>
+                        <path d="M0 4a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2 0v10h7V4H2z"/>
+                    </svg>
+                    <svg class="copied-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                    <span class="button-text">Copy</span>
+                </button>
+            </div>
+            <p class="snippet-explanation">
+                Utilizes <code>async</code> and <code>await</code> keywords for asynchronous operations. <code>SimulateWorkAsync</code> mimics a long-running task without freezing the main application thread.
+            </p>
+            <div class="code-block-wrapper">
+                <pre><code class="language-csharp">
+using System;
+using System.Threading.Tasks;
+
+public class AsyncOperations
+{
+    public static async Task SimulateWorkAsync(string taskName, int delayMilliseconds)
+    {
+        Console.WriteLine($"Task '{taskName}' starting (Thread: {Environment.CurrentManagedThreadId})");
+        await Task.Delay(delayMilliseconds); // Non-blocking delay
+        Console.WriteLine($"Task '{taskName}' finished.");
+    }
+
+    public static async Task Main(string[] args)
+    {
+        Console.WriteLine($"Main method started (Thread: {Environment.CurrentManagedThreadId}).");
+
+        Task taskAlpha = SimulateWorkAsync("Alpha", 2000);
+        Task taskBeta = SimulateWorkAsync("Beta", 1000);
+
+        Console.WriteLine("Asynchronous tasks initiated.");
+        await Task.WhenAll(taskAlpha, taskBeta); // Concurrently await completion
+        Console.WriteLine("All asynchronous tasks completed. Main method ending.");
+    }
+}
+                </code></pre>
+            </div>
+        </section>
+
+        <section class="snippet-entry">
+            <div class="snippet-header">
+                <h2 class="snippet-title">IO: File Handling</h2>
+                 <button class="copy-button" aria-label="Copy code to clipboard">
+                    <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2zM5 0h1a1 1 0 0 1 1 1v1H5a1 1 0 0 1-1-1V0a1 1 0 0 1 1-1z"/>
+                        <path d="M0 4a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2 0v10h7V4H2z"/>
+                    </svg>
+                    <svg class="copied-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                    <span class="button-text">Copy</span>
+                </button>
+            </div>
+            <p class="snippet-explanation">
+                Illustrates reading all text content from a file via <code>File.ReadAllText</code>. Includes essential <code>try-catch</code> blocks for robust error handling (e.g., <code>FileNotFoundException</code>).
+            </p>
+            <div class="code-block-wrapper">
+                <pre><code class="language-csharp">
+using System;
+using System.IO;
+
+public class FileInputOutput
+{
+    public static void Main(string[] args)
+    {
+        string targetFilePath = "myDocument.txt";
+
+        // For demonstration, create the file if it doesn't exist
+        if (!File.Exists(targetFilePath))
+        {
+            File.WriteAllText(targetFilePath, "Welcome to the Digital Nexus!\nThis is your C# documentation hub.");
+            Console.WriteLine($"Demo file '{targetFilePath}' created successfully.");
+        }
+
+        try
+        {
+            string fileContent = File.ReadAllText(targetFilePath);
+            Console.WriteLine($"--- Content of '{targetFilePath}' ---");
+            Console.WriteLine(fileContent);
+            Console.WriteLine("--- End of Content ---");
+        }
+        catch (FileNotFoundException)
+        {
+            Console.Error.WriteLine($"CRITICAL ERROR: The file '{targetFilePath}' could not be found.");
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"An unexpected I/O error occurred: {ex.Message}");
+        }
+    }
+}
+                </code></pre>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; <span id="currentYear"></span> Your Team Name // C# Digital Nexus Docs.
+            Powered by <a href="https://highlightjs.org/" target="_blank" rel="noopener noreferrer">Highlight.js</a>.
+        </p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
+    <script>
+        // Initialize Highlight.js
+        hljs.highlightAll();
+
+        // Enhanced Copy Button Functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const copyButtons = document.querySelectorAll('.copy-button');
+
+            copyButtons.forEach(button => {
+                const buttonTextSpan = button.querySelector('.button-text');
+                const originalButtonText = buttonTextSpan.textContent;
+
+                button.addEventListener('click', () => {
+                    const snippetEntry = button.closest('.snippet-entry');
+                    const codeBlock = snippetEntry.querySelector('pre code.language-csharp');
+
+                    if (codeBlock) {
+                        const codeToCopy = codeBlock.textContent;
+                        navigator.clipboard.writeText(codeToCopy).then(() => {
+                            buttonTextSpan.textContent = 'Copied!';
+                            button.classList.add('copied');
+
+                            setTimeout(() => {
+                                buttonTextSpan.textContent = originalButtonText;
+                                button.classList.remove('copied');
+                            }, 2500);
+                        }).catch(err => {
+                            console.error('Failed to copy text: ', err);
+                            buttonTextSpan.textContent = 'Error!';
+                            setTimeout(() => {
+                                buttonTextSpan.textContent = originalButtonText;
+                            }, 2500);
+                        });
+                    } else {
+                        console.error('Could not find code block to copy.');
+                    }
+                });
+            });
+        });
+
+        // Dynamically set the current year in the footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

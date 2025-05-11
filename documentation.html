@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameScript Documentation</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css">
+    <style>
+        /* --- Global Styles & Variables --- */
+        :root {
+            --bg-color-main: #111827;
+            --bg-color-card: #1f2937;
+            --bg-color-header-footer: #161b22;
+            --bg-color-mobile-menu: #1f2937;
+            --border-color: #374151;
+            --text-color-primary: #F3F4F6;
+            --text-color-secondary: #9CA3AF;
+            --text-color-muted: #6B7280;
+
+            --accent-color-primary: #F59E0B;
+            --accent-color-primary-hover: #FCD34D;
+
+            --accent-color-secondary: #10B981;
+            --accent-color-secondary-hover: #34D399;
+            --accent-color-secondary-bg: rgba(16, 185, 129, 0.1);
+
+            /* --code-bg-color: #282c34; -- Prism theme will likely override this for <pre> */
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+            --container-width: 980px;
+            --header-height: 64px;
+            --animation-duration: 0.3s;
+            --animation-timing: ease-in-out;
+            --card-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            --card-hover-shadow: 0 6px 18px rgba(0,0,0,0.35);
+            --mobile-breakpoint: 768px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-family); background-color: var(--bg-color-main);
+            color: var(--text-color-primary); line-height: 1.65; font-size: 16px;
+        }
+        body.mobile-menu-open { overflow: hidden; }
+        .container {
+            max-width: var(--container-width); margin-left: auto; margin-right: auto;
+            padding-left: 24px; padding-right: 24px;
+        }
+
+        /* --- Header & Navigation --- */
+        .site-header {
+            background-color: var(--bg-color-header-footer); 
+            border-bottom: 1px solid var(--border-color);
+            height: var(--header-height); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+            transition: box-shadow var(--animation-duration) var(--animation-timing);
+        }
+        .site-header.scrolled { box-shadow: 0 3px 10px rgba(0,0,0,0.3); }
+        .site-header .container {
+            display: flex; align-items: center; justify-content: space-between; height: 100%;
+        }
+        .logo {
+            font-size: 1.6em; font-weight: 700; color: var(--text-color-primary);
+            text-decoration: none; transition: color var(--animation-duration) var(--animation-timing);
+            z-index: 1001;
+        }
+        .logo:hover { color: var(--accent-color-primary-hover); }
+        .site-nav { display: flex; }
+        .site-nav a {
+            color: var(--text-color-secondary); text-decoration: none; margin-left: 24px;
+            font-size: 1em; font-weight: 500; padding: 6px 0;
+            border-bottom: 2px solid transparent;
+            transition: color var(--animation-duration) var(--animation-timing),
+                        border-bottom-color var(--animation-duration) var(--animation-timing);
+        }
+        .site-nav a:hover, .site-nav a.active {
+            color: var(--accent-color-primary); border-bottom-color: var(--accent-color-primary);
+        }
+        .mobile-menu-toggle {
+            display: none; background: none; border: none; padding: 10px; cursor: pointer; z-index: 1005;
+        }
+        .mobile-menu-toggle .hamburger-icon {
+            display: block; width: 24px; height: 2px; background-color: var(--text-color-primary);
+            position: relative; transition: background-color 0s var(--animation-duration);
+        }
+        .mobile-menu-toggle .hamburger-icon::before, .mobile-menu-toggle .hamburger-icon::after {
+            content: ''; display: block; width: 24px; height: 2px;
+            background-color: var(--text-color-primary); position: absolute; left: 0;
+            transition: transform var(--animation-duration) var(--animation-timing),
+                        top var(--animation-duration) var(--animation-timing);
+        }
+        .mobile-menu-toggle .hamburger-icon::before { top: -7px; }
+        .mobile-menu-toggle .hamburger-icon::after { top: 7px; }
+        .mobile-menu-toggle.is-active .hamburger-icon { background-color: transparent; }
+        .mobile-menu-toggle.is-active .hamburger-icon::before { top: 0; transform: rotate(45deg); }
+        .mobile-menu-toggle.is-active .hamburger-icon::after { top: 0; transform: rotate(-45deg); }
+
+        @media (max-width: 768px) {
+            .site-nav {
+                position: fixed; top: 0; right: -100%; width: min(80vw, 300px); height: 100vh;
+                background-color: var(--bg-color-mobile-menu); box-shadow: -5px 0 15px rgba(0,0,0,0.25);
+                padding-top: calc(var(--header-height) + 20px); flex-direction: column;
+                align-items: flex-start; transition: right var(--animation-duration) var(--animation-timing);
+                z-index: 1000; overflow-y: auto; display: flex;
+            }
+            .site-nav.is-open { right: 0; }
+            .site-nav a {
+                display: block; width: 100%; padding: 18px 30px; margin-left: 0;
+                font-size: 1.1em; color: var(--text-color-primary);
+                border-bottom: 1px solid var(--border-color);
+            }
+            .site-nav a:last-child { border-bottom: none; }
+            .site-nav a:hover, .site-nav a.active {
+                background-color: var(--accent-color-primary); color: var(--bg-color-main);
+                border-bottom-color: var(--accent-color-primary);
+            }
+            .mobile-menu-toggle { display: block; }
+        }
+
+        /* --- Main Content & Sections --- */
+        .main-content { padding-top: 40px; padding-bottom: 60px; }
+        .doc-section {
+            padding: 30px 0; margin-bottom: 35px; border-bottom: 1px solid var(--border-color);
+            opacity: 0; transform: translateY(25px);
+            transition: opacity 0.55s var(--animation-timing), transform 0.55s var(--animation-timing);
+        }
+        .doc-section:last-child { border-bottom: none; margin-bottom: 0; }
+        .doc-section.visible { opacity: 1; transform: translateY(0); }
+        .doc-section h2 {
+            font-size: 2.2em; font-weight: 600; margin-bottom: 30px; padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color); color: var(--text-color-primary); position: relative;
+        }
+        .doc-section h2::after {
+            content: ''; position: absolute; bottom: -1px; left: 0; width: 60px; height: 2px;
+            background-color: var(--accent-color-primary); transition: width 0.4s var(--animation-timing);
+        }
+        .doc-section:hover h2::after { width: 100px; }
+        .doc-section h3 {
+            font-size: 1.6em; font-weight: 500; margin-top: 35px; margin-bottom: 20px;
+            color: var(--text-color-primary);
+        }
+        .doc-section p, .doc-section ul, .doc-section .note {
+            margin-bottom: 20px; font-size: 1.05em; color: var(--text-color-secondary);
+        }
+        .doc-section strong { color: var(--text-color-primary); font-weight: 600; }
+        .doc-section ul { list-style-position: outside; padding-left: 25px; }
+        .doc-section ul li { margin-bottom: 10px; }
+        .doc-section ul li::marker { color: var(--accent-color-primary); }
+
+        /* Inline code (Prism doesn't usually style this heavily by default, so we can) */
+        .doc-section code:not([class*="language-"]) { /* Target inline code specifically */
+            background-color: var(--bg-color-card); color: var(--text-color-primary);
+            padding: 0.25em 0.6em; border-radius: 6px; font-size: 0.9em;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Code Blocks (Prism will take over styling for elements with language- class) */
+        .doc-section pre[class*="language-"] {
+            margin-bottom: 25px; margin-top: 15px; border-radius: 8px;
+            border: 1px solid var(--border-color); /* Optional border around Prism block */
+            box-shadow: var(--card-shadow);
+            transition: box-shadow var(--animation-duration) var(--animation-timing),
+                        transform var(--animation-duration) var(--animation-timing);
+            /* Prism theme (e.g., Okaidia) will set its own background and padding for pre and code */
+            font-size: 0.9em; /* Adjust base font size for code blocks if needed */
+        }
+        .doc-section pre[class*="language-"]:hover {
+            box-shadow: var(--card-hover-shadow); transform: translateY(-2px);
+        }
+        /* Ensure Prism's line numbers (if enabled) play nice */
+        .line-numbers .line-numbers-rows {
+            border-right-color: var(--border-color) !important;
+        }
+
+        .command-def {
+            margin-bottom: 35px; padding: 25px; background-color: var(--bg-color-card);
+            border-radius: 8px; border: 1px solid var(--border-color); box-shadow: var(--card-shadow);
+            transition: transform var(--animation-duration) var(--animation-timing),
+                        box-shadow var(--animation-duration) var(--animation-timing);
+        }
+        .command-def:hover { transform: translateY(-4px); box-shadow: var(--card-hover-shadow); }
+        .command-def h3 { margin-top: 0; font-size: 1.4em; color: var(--accent-color-primary); }
+        .command-def h3 code { /* For code inside command def titles */
+            font-size: 1em; background-color: transparent !important; border: none;
+            color: inherit !important; padding: 0 !important;
+            font-family: inherit !important; /* Inherit font from h3 */
+        }
+        .note {
+            font-size: 0.95em; color: var(--text-color-secondary); padding: 15px 20px;
+            background-color: var(--accent-color-secondary-bg);
+            border-left: 4px solid var(--accent-color-secondary); border-radius: 0 6px 6px 0;
+        }
+        .note strong { color: var(--accent-color-secondary-hover); }
+
+        /* --- Footer --- */
+        .site-footer {
+            padding: 40px 0; text-align: center; color: var(--text-color-muted);
+            font-size: 0.9em; border-top: 1px solid var(--border-color); margin-top: 40px;
+            background-color: var(--bg-color-header-footer);
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="#" class="logo">GameScript</a>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-icon"></span>
+            </button>
+            <nav class="site-nav">
+                <a href="#introduction">Introduction</a>
+                <a href="#variables">Language Basics</a>
+                <a href="#commands">Commands</a>
+                <a href="#returnFunctions">Return Functions</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section id="introduction" class="doc-section">
+                <h2>Welcome to GameScript!</h2>
+                <p>GameScript is a very simple scripting language designed for easy interaction within the game. Its focus is on readability and minimal features to get things done quickly.</p>
+                <p>It's perfect for... well... burning countless hours of your life chasing deadlines, debugging code at 3 AM, and questioning your career choices while your manager takes all the credit. Truly, a developer's dream come true!</p>
+            </section>
+
+            <section id="variables" class="doc-section">
+                <h2>Variables</h2>
+                <p>In GameScript, variables are straightforward:</p>
+                <ul>
+                    <li>They can only hold <strong>integer</strong> values (whole numbers).</li>
+                    <li>They are <strong>immutable</strong>, meaning once you set a variable's value, it cannot be changed.</li>
+                </ul>
+                <p>To declare a variable, use the <code>var</code> keyword:</p>
+                <pre><code class="language-gamescript">var score = 100;
+var enemyHealth = 50;</code></pre>
+                <p class="note"><strong>Note:</strong> GameScript uses and recommends <strong>camelCase</strong> for both variable names and keywords. This is not enforced, but it helps with readability.</p>
+                <p>You can then use these variables in commands that accept values.</p>
+                <p>To use a variable, simply refer to it by its name:</p>
+                <pre><code class="language-gamescript">Repeat(enemyHealth) 
+{
+    // ... insert code to be repeated enemyHealth times ...
+}</code></pre>
+            </section>
+
+            <section id="repeat" class="doc-section">
+                <h2>Repeat Loops</h2>
+                <p>In GameScript, the <code>Repeat</code> loop allows you to execute a block of code a specific number of times. However, it only accepts <strong>integer</strong> values as parameters.</p>
+                <ul>
+                    <li>The parameter must be a positive whole number.</li>
+                    <li>Using non-integer values or variables with non-integer values will result in an error.</li>
+                </ul>
+                <p>To use a <code>Repeat</code> loop, follow this syntax:</p>
+                <pre><code class="language-gamescript">Repeat(5) 
+{
+    // ... code to repeat 5 times ...
+}</code></pre>
+                <p class="note"><strong>Note:</strong> Ensure that the parameter passed to <code>Repeat</code> is a valid integer. Variables used as parameters must also hold integer values.</p>
+            <p>You can even use <code>variables</code> or <code>Functions</code> with return values:</p>
+
+<pre><code class="language-gamescript">var enemyCount = 5;    
+Repeat(enemyCount) 
+{
+    // ... code to repeat enemyCount times ...
+}
+
+Repeat(NumberOfEnemiesInRange()) 
+{
+    // ... code to repeat for the number of enemies in range ...
+}
+</code></pre>
+                <p>In this example, <code>enemyCount</code> is a variable holding the number of enemies, and <code>NumberOfEnemiesInRange()</code> is a function that returns the number of bugs in range.</p>
+                <p>GameScript will handle the rest. Just make sure you don't try to use a string or float as a parameter, or I will find you.</p>
+            </section>
+
+            <section id="functions" class="doc-section">
+                <h2>Functions</h2>
+                <p>In GameScript, Functions solely exist to quickly communicate the <strong><i>function</i></strong> of a block of code:</p>
+                <ul>
+                    <li>They <strong>CANNOT</strong> be referenced elsewhere.</li>
+                    <li>They <strong>CANNOT</strong> be created in the middle of a codeblock.</li>
+                    <li>Functions are <strong>SOLELY</strong> just <i>Syntactic Sugar</i> to make your life easier as a programmer.</li>
+                </ul>
+                <p>To declare a function, use the <code>function</code> keyword:</p>
+                <pre><code class="language-gamescript">function RotatesTwice() // you get to choose the name of the function
+{
+    Turn(45);
+    Turn(45);
+}
+                </code></pre>
+                <p class="note"><strong>Note:</strong> GameScript uses and recommends <strong>UpperCamelCase</strong> for function names. This is not enforced, but it helps with readability.</p>
+            </section>
+
+            
+
+            <section id="commands" class="doc-section">
+                <h2>Inbuilt Commands</h2>
+                <p>GameScript provides a few essential commands for <strong><i>Debugging</i></strong>.</p>
+
+                <div class="command-def">
+                    <h3><code>Move(steps: INTEGER)</code></h3>
+                    <p>Moves the Debugger forward by the given number of steps. And by forward we mean "toward the inevitable." This uses the current angle/direction to determine the path.</p>
+                    <pre><code class="language-gamescript">Move(5);</code></pre>
+                    <p class="note"><strong>Note:</strong> Similar to the <code>Repeat</code> command, you can use a variable or function that returns an integer as the parameter.</p>
+                </div>
+
+                <div class="command-def">
+                    <h3><code>Turn(angle: INTEGER)</code></h3>
+                    <p>Rotates the Debugger relative to current direction. Only use positive numbers! One of our previous developers used negative angles...he's no longer with us.</p>
+                    <pre><code class="language-gamescript">Turn(90);</code></pre>
+                    <p class="note"><strong>Note:</strong> Similar to the <code>Repeat</code> command, you can use a variable or function that returns an integer as the parameter.</p>
+                </div>
+
+                <div class="command-def">
+                    <h3><code>TurnTo(angle: INTEGER)</code></h3>
+                    <p>Rotates the Debugger to face a specific angle in <strong>World Space</strong>. Again, only use positive numbers! Someone out there is making developers who use negative numbers disappear.</p>
+                    <pre><code class="language-gamescript">TurnTo(90); // this code will make the Debugger face straight up</code></pre>
+                    <p class="note"><strong>Note:</strong> Similar to the <code>Repeat</code> command, you can use a variable or function that returns an integer as the parameter.</p>
+                </div>
+
+                <div class="command-def">
+                    <h3><code>Shoot(numberOfShots: INTEGER)</code></h3>
+                    <p>This command <i>"fires a specified number of debug strings"</i> towards a bug...I dunno man, I only got hired to write the documentation. The actual Debugging API code is dark magic to me.</p>
+                    <pre><code class="language-gamescript">Shoot(10); // this will fire in the current direction of the Debugger</code></pre>
+                    <p class="note"><strong>Note:</strong> Similar to the <code>Repeat</code> command, you can use a variable or function that returns an integer as the parameter.</p>
+                </div>
+            </section>
+
+            <section id="returnFunctions" class="doc-section">
+                <h2>Functions with Return Values</h2>
+                <p>GameScript provides a few functions that return <strong><i>Integer</i></strong> values. These functions can be used as parameters for other commands or functions.</p>
+            
+                <div class="command-def">
+                    <h3><code>FindAngleToEnemy()</code></h3>
+                    <p>Finds the angle to the closest Reported Bug.</p> 
+                    <p>I have no idea why the developer of the Debugging API used RPG terms...I tried to find them, but apparently they don't exist? Like legitimately, there's no record of them...</p>
+                    <p>Something's wrong.</p>
+                    <pre><code class="language-gamescript">var angle = FindAngleToEnemy();
+// OR 
+TurnTo(FindAngleToEnemy());</code></pre>
+                    </code></pre>
+                    <p class="note"><strong>Note:</strong> <code>FindAngleToEnemy()</code> <strong>CANNOT</strong> be used by itself. It needs to be stored in a <code>variable</code> or used as a parameter.</p>
+                </div>
+            </section>
+
+            
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; Sai Mangipudi 2025 - Help me...I've lost literal pounds of braincells</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Extend Prism's JavaScript language for GameScript ---
+            if (Prism && Prism.languages.javascript) {
+                Prism.languages.gamescript = Prism.util.clone(Prism.languages.javascript);
+
+                Prism.languages.insertBefore('gamescript', 'keyword', {
+                    'gamescript-keyword': {
+                        // Pattern for GameScript specific keywords
+                        // \b ensures whole word matching
+                        pattern: /\b(?:var|Repeat|Move|Turn|TurnTo|Shoot|FindAngleToEnemy)\b/,
+                        alias: 'keyword' // Style these like other keywords
+                    }
+                });
+                // Alias 'gs' to 'gamescript' if needed
+                Prism.languages.gs = Prism.languages.gamescript;
+            }
+
+            // Highlight all code blocks
+            Prism.highlightAll();
+
+
+            const siteNav = document.querySelector('.site-nav');
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const siteHeader = document.querySelector('.site-header');
+            const navLinks = document.querySelectorAll('.site-nav a');
+
+            // --- Mobile Menu Toggle ---
+            if (mobileMenuToggle && siteNav) {
+                mobileMenuToggle.addEventListener('click', () => {
+                    siteNav.classList.toggle('is-open');
+                    mobileMenuToggle.classList.toggle('is-active');
+                    const expanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true' || false;
+                    mobileMenuToggle.setAttribute('aria-expanded', String(!expanded));
+                    document.body.classList.toggle('mobile-menu-open');
+                });
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (siteNav.classList.contains('is-open')) {
+                        siteNav.classList.remove('is-open');
+                        mobileMenuToggle.classList.remove('is-active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            const sections = document.querySelectorAll('.doc-section');
+            const headerHeight = siteHeader ? siteHeader.offsetHeight : 60;
+
+            const sectionObserverOptions = { root: null, rootMargin: `-${headerHeight}px 0px -30% 0px`, threshold: 0.01 };
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, sectionObserverOptions);
+            sections.forEach(section => { sectionObserver.observe(section); });
+
+            window.addEventListener('scroll', () => {
+                if (siteHeader) {
+                    siteHeader.classList.toggle('scrolled', window.scrollY > 20);
+                }
+                let currentSectionId = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - headerHeight - 100;
+                    if (window.scrollY >= sectionTop) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+                document.querySelectorAll('.site-nav a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

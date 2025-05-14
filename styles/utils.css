@@ -6,18 +6,31 @@
     background-color: var(--color-rose);
     color: #0c0a09;
     padding: 0.5em 1em;
-    border-radius: 6px;
-    box-shadow: 0 10px 20px rgba(234, 179, 8, 0.5), 0 6px 6px rgba(234, 179, 8, 0.5),
-        0 0 100px -10px var(--color-rose);
-
-    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    border-radius: 7px;
+    box-shadow: 0 8px 15px rgba(234, 179, 8, 0.45), 0 5px 5px rgba(234, 179, 8, 0.35),
+                0 0 90px -12px var(--color-rose);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* General purpose smooth transition */
 }
 
 .btn:hover {
     background-color: var(--color-indigo);
-    transform: translateY(-3px);
-    box-shadow: 0 14px 28px rgba(74, 222, 128, 0.25), 0 10px 10px rgba(74, 222, 128, 0.22),
-        0 0 120px -10px var(--color-indigo);
+    transform: translateY(-6px) scale(1.04) rotate(-2deg); /* Lift, scale, and slight tilt */
+    /* Experiment with a more "particle" like shadow by layering multiple, slightly offset shadows */
+    box-shadow: 0 2px 3px rgba(74, 222, 128, 0.1),   /* Closest, sharpest small shadow */
+                0 6px 8px rgba(74, 222, 128, 0.15),  /* Mid-level shadow */
+                0 12px 20px rgba(74, 222, 128, 0.2), /* Main body of shadow */
+                0 20px 35px rgba(74, 222, 128, 0.25), /* Furthest, softest shadow */
+                0 0 120px -5px var(--color-indigo);   /* Glow */
+}
+
+.btn:active {
+    background-color: var(--color-indigo);
+    transform: translateY(-2px) scale(0.97) rotate(1deg); /* Press down and slightly tilt other way */
+    box-shadow: 0 1px 2px rgba(74, 222, 128, 0.2),
+                0 3px 4px rgba(74, 222, 128, 0.25),
+                0 6px 10px rgba(74, 222, 128, 0.3),
+                0 0 90px -10px var(--color-indigo);
+    transition-duration: 0.1s;
 }
 
 
@@ -109,6 +122,17 @@
     .container {
         max-width: 1536px;
     }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 

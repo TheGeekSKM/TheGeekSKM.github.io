@@ -46,3 +46,36 @@
     height: var(--size-xl);
     color: var(--color-stone600);
 }
+
+/* Assuming .mobile-nav.is-open is the class added when menu is open */
+.mobile-nav.is-open .mobile-nav__link {
+    animation: slideInFromRight 0.5s ease-out forwards;
+    opacity: 0; /* Start hidden before animation */
+}
+
+/* Stagger animation for each link */
+.mobile-nav.is-open .mobile-nav__link:nth-child(1) { animation-delay: 0.1s; }
+.mobile-nav.is-open .mobile-nav__link:nth-child(2) { animation-delay: 0.2s; }
+.mobile-nav.is-open .mobile-nav__link:nth-child(3) { animation-delay: 0.3s; }
+/* ... and so on for all your links ... */
+.mobile-nav.is-open .mobile-nav__link:nth-child(4) { animation-delay: 0.4s; }
+.mobile-nav.is-open .mobile-nav__link:nth-child(5) { animation-delay: 0.5s; }
+.mobile-nav.is-open .mobile-nav__link-line { animation: fadeIn 0.5s ease-out 0.6s forwards; opacity: 0; }
+.mobile-nav.is-open .mobile-nav__sun { animation: fadeIn 0.5s ease-out 0.7s forwards; opacity: 0; }
+
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+     from { opacity: 0; }
+     to { opacity: 1; }
+}

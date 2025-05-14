@@ -1,3 +1,58 @@
+.projects__card-container {
+    display: grid;
+    /* grid-template-columns: 1fr; Remove this for now, will be handled in media queries */
+    gap: 2.5rem; /* Slightly increased gap for better breathing room */
+    margin-top: 3rem; /* Add some space below the section description */
+}
+
+.project__card {
+    background-color: var(--color-stone900); /* Give cards a subtle background */
+    border-radius: 12px; /* Softer, more pronounced rounding */
+    padding: 1.5rem; /* Add internal padding to the card */
+    text-align: left; /* Align text to the left within the card for better readability */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), /* Softer initial shadow */
+                0 0 15px rgba(0,0,0,0.1) inset; /* Subtle inner shadow for depth */
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+                background-color 0.3s ease-out;
+    /* Remove bottom margin here, gap will handle it in grid */
+    /* margin-bottom: 5rem; REMOVE THIS - handled by gap or specific mobile margin below */
+}
+
+/* Add back margin for single column layout on small screens if grid is not active */
+@media (max-width: 639px) { /* Screens smaller than your 'smal' breakpoint */
+    .project__card:not(:last-child) {
+        margin-bottom: 3rem; /* Reduced margin for better flow */
+    }
+    .projects__card-container {
+        display: block; /* Revert to block for single column */
+    }
+}
+
+
+.project__card:hover {
+    transform: translateY(-10px) scale(1.03); /* More noticeable lift and scale */
+    background-color: var(--color-stone800); /* Slightly lighter on hover to "pop" */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3),  /* Stronger, more defined shadow */
+                0 8px 16px rgba(var(--color-indigo-rgb, 74, 222, 128), 0.2), /* Accent color shadow part */
+                0 0 30px -5px var(--color-indigo); /* Accent glow */
+}
+
+.project__project-title {
+    font-size: var(--size-lg); /* Slightly larger base title */
+    margin-bottom: 0.75rem;
+    color: var(--color-light); /* Ensure title is bright */
+    transition: color 0.3s ease-out;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.project__card:hover .project__project-title {
+    color: var(--color-indigo); /* Highlight title on card hover */
+}
+
 .projects {
     text-align: center;
 }
@@ -24,36 +79,59 @@
 .projects__image-wrapper {
     position: relative;
     overflow: hidden;
-    border-radius: 0.5em;
+    border-radius: 8px; /* Match card's softer rounding */
+    margin-bottom: 1rem; /* Space between image and text */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Add a subtle shadow to the image itself */
+}
+
+.projects__image-wrapper img { /* Ensure images within scale nicely */
+    display: block;
+    width: 100%;
+    transition: transform 0.4s ease-out;
+}
+
+.project__card:hover .projects__image-wrapper img {
+    transform: scale(1.08); /* Slightly more zoom on image when card is hovered */
 }
 
 .projects__image-wrapper::after {
     content: '';
-    background-color: rgba(74, 222, 128, 0.1);
+    background-color: rgba(var(--color-indigo-rgb, 74, 222, 128), 0.15); /* Use variable and slightly increase opacity */
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1;
-    transition: background-color 0.2s;
+    transition: background-color 0.3s ease-out, opacity 0.3s ease-out;
 }
 
-.projects__image-wrapper:hover::after {
-    background-color: rgba(74, 222, 128, 0);
-
+.project__card:hover .projects__image-wrapper::after { /* Change on card hover, not just image wrapper hover */
+    background-color: rgba(var(--color-indigo-rgb, 74, 222, 128), 0);
+    opacity: 0.5; /* Or make it a bit more transparent to show image detail */
 }
 
 .projects__project-gameDescription {
     font-size: var(--size-sm);
-    color: var(--color-stone600);
+    color: var(--color-stone400); /* Lighter than stone600 for better contrast on stone800 bg */
     margin: 1rem 0;
+    line-height: 1.6; /* Improve readability */
 }
 
 .projects__project-gameLearning {
-    font-size: var(--size-sm);
+    font-size: var(--size-xs); /* Slightly smaller for tertiary info */
     color: var(--color-stone400);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem; /* Space before the button/link */
+    font-style: italic; /* Differentiate it a bit */
+    line-height: 1.5;
+}
+
+/* Ensure the button inside the card is clearly part of it */
+.project__card .btn {
+    display: block; /* Make button full width of its container or set a max-width */
+    width: fit-content; /* Or a specific width like 80% or a px value */
+    margin: 1.5rem auto 0; /* Center button if it's not full width */
+    text-align: center;
 }
 
 .project__card:not(:last-child) {
@@ -70,24 +148,18 @@
     .projects__title {
         font-size: var(--size-3xl);
     }
-
     .projects__description {
         font-size: var(--size-base);
     }
-    
     .project__project-title {
-        font-size: var(--size-lg);
-        margin-bottom: 1.5rem;
+        font-size: var(--size-xl); /* Upscale title */
+        margin-bottom: 1rem;
     }
-
     .projects__project-gameDescription {
         font-size: var(--size-base);
-        margin: 1.5rem 0;
     }
-    
     .projects__project-gameLearning {
-        font-size: var(--size-base);
-        margin-bottom: 1.5rem;
+        font-size: var(--size-sm);
     }
 }
 
@@ -95,53 +167,37 @@
 @media (min-width: 640px) {
     .projects__card-container {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
+        grid-template-columns: 1fr 1fr; /* Two columns */
+        gap: 2.5rem; /* Keep the increased gap */
     }
-
-    .project__project-title {
-        font-size: var(--size-lg);
-    }
-
-    .projects__project-gameDescription {
-        font-size: var(--size-base);
-        margin: 1em 0;
-    }
-    
-    .projects__project-gameLearning {
-        font-size: var(--size-base);
-        margin-bottom: 1em;
-    }
-    
     .project__card:not(:last-child) {
-        margin-bottom: 0;
+        margin-bottom: 0; /* Grid gap handles this */
     }
-}
-
-/* med */
-@media (min-width: 768px) {
-    
+    .project__project-title {
+        font-size: var(--size-lg); /* Adjust if needed for grid */
+    }
+    /* Other text sizes might need slight adjustments for the 2-column layout */
 }
 
 /* large */
 @media (min-width: 1024px) {
+    .projects__card-container {
+         /* Optionally go to 3 columns on very large screens if you have many projects */
+        /* grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); */
+        gap: 3rem; /* More space on larger screens */
+    }
     .projects__title {
         font-size: var(--size-4xl);
     }
-
     .projects__description {
         font-size: var(--size-lg);
     }
-
     .project__project-title {
         font-size: var(--size-xl);
-        margin-bottom: 1rem;
     }
-
     .projects__project-gameDescription {
         font-size: var(--size-base);
     }
-
     .projects__project-gameLearning {
         font-size: var(--size-base);
     }
@@ -152,26 +208,47 @@
     .projects__title {
         font-size: var(--size-5xl);
     }
-
     .projects__description {
-        font-size: var(--size-xxl);
+        font-size: var(--size-xl); /* Changed from xxl for better balance */
     }
-
     .project__project-title {
-        font-size: var(--size-xxl);
-        margin-bottom: 1rem;
+        font-size: var(--size-2xl); /* Changed from xxl */
     }
-
     .projects__project-gameDescription {
         font-size: var(--size-lg);
     }
-
     .projects__project-gameLearning {
         font-size: var(--size-lg);
     }
 }
 
-/* xxlarge */
-@media (min-width: 1536px) {
-    
+.project__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem; /* Or adjust as needed */
+    justify-content: center;
+    align-items: center;
 }
+
+.tag {
+  background-color: var(--color-stone800); /* Darker tag background */
+  color: var(--color-light);
+  padding: 0.25em 0.75em;
+  border-radius: 15px; /* Pill shape */
+  font-size: var(--size-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Optional: Specific colors for certain tags */
+.tag--unity { background-color: #222c37; color: white; } /* Example Unity color */
+.tag--unreal { background-color: #222c37; color: white; } /* Example Unreal color */
+.tag--board { background-color: #222c37; color: white; } /* Example Boardgame color */
+.tag--vr { background-color: var(--color-indigo); color: var(--color-dark); }
+.tag--horror { background-color: var(--color-rose); color: var(--color-dark); }
+.tag--pcn { background-color: var(--color-rose); color: var(--color-dark); }
+.tag--racing { background-color: var(--color-rose); color: var(--color-dark); }
+.tag--tss { background-color: var(--color-rose); color: var(--color-dark); }
+/* Add more for other common tags */

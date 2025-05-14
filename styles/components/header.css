@@ -113,3 +113,30 @@
 @media (min-width: 1536px) {
     
 }
+
+.header__link {
+    /* ... existing styles ... */
+    position: relative; /* Needed for the ::after pseudo-element */
+    padding-bottom: 0.3em; /* Add some space for the underline */
+    transition: color 0.2s ease-in-out;
+}
+
+.header__link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px; /* Thickness of underline */
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-rose);
+    transition: width 0.3s ease-in-out;
+}
+
+.header__link:hover::after,
+.header__link:focus::after { /* :focus for accessibility */
+    width: 100%;
+}
+
+.header__link:hover {
+    color: var(--color-rose); /* Keep existing color change or adjust if underline is enough */
+}

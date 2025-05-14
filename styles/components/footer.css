@@ -1,9 +1,28 @@
+.footer__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 2rem; /* Add some padding */
+}
+
+.footer__social-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer__social-links a {
+    color: var(--color-stone400);
+    font-size: var(--size-lg); /* Adjust icon size */
+    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.footer__social-links a:hover {
+    color: var(--color-rose);
+    transform: scale(1.1);
+}
+
 .footer__title {
-    font-size: var(--size-xs);
-    font-weight: 400;
-    color: var(--color-stone600);
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    user-select: none;
+    /* ... existing styles ... */
+    margin-top: 1rem; /* Add some space above copyright */
 }

@@ -452,7 +452,7 @@ class VanillaTilt {
   extendSettings(settings) {
     let defaultSettings = {
       reverse: false,
-      max: 15,
+      max: 5,
       startX: 0,
       startY: 0,
       perspective: 1000,
@@ -462,17 +462,17 @@ class VanillaTilt {
       transition: true,
       axis: null,
       glare: false,
-      "max-glare": 1,
+      "max-glare": 0.5,
       "glare-prerender": false,
       "full-page-listening": false,
       "mouse-event-element": null,
       reset: true,
       "reset-to-start": true,
       gyroscope: true,
-      gyroscopeMinAngleX: -45,
-      gyroscopeMaxAngleX: 45,
-      gyroscopeMinAngleY: -45,
-      gyroscopeMaxAngleY: 45,
+      gyroscopeMinAngleX: -5,
+      gyroscopeMaxAngleX: 5,
+      gyroscopeMinAngleY: -5,
+      gyroscopeMaxAngleY: 5,
       gyroscopeSamples: 10
     };
 

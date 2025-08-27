@@ -31,7 +31,7 @@
 
 
 .project__card:hover {
-    transform: translateY(-10px) scale(1.03); /* More noticeable lift and scale */
+    transform: translateY(-5px); /* More noticeable lift and scale */
     background-color: var(--color-stone800); /* Slightly lighter on hover to "pop" */
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3),  /* Stronger, more defined shadow */
                 0 8px 16px rgba(var(--color-indigo-rgb, 74, 222, 128), 0.2), /* Accent color shadow part */
@@ -90,9 +90,7 @@
     transition: transform 0.4s ease-out;
 }
 
-.project__card:hover .projects__image-wrapper img {
-    transform: scale(1.08); /* Slightly more zoom on image when card is hovered */
-}
+
 
 .projects__image-wrapper::after {
     content: '';

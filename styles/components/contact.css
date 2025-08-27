@@ -21,6 +21,23 @@
     margin: auto;
 }
 
+.contact__btn {
+    background-color: var(--color-indigo);
+    color: var(--color-light);
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: 8px;
+    font-size: var(--size-sm);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 20%;
+    align-self: center;
+
+    &:hover {
+        background-color: darken(var(--color-indigo), 5%);
+    }
+}
+
 
 /* xs */
 @media (min-width: 475px) {

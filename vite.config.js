@@ -18,6 +18,7 @@ export default defineConfig({
         novel: 'novel.html',
         codeSnippet: 'code-snippet.html',
         documentation: 'documentation.html',
+        workplanning: 'workplanning.html',
       },
       external: ['novels/**/*.md'], // Force Vite to keep markdown files
     },

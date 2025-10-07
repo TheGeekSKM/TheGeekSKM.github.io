@@ -6,74 +6,39 @@
 		<title>Reactor Control</title>
 		<script src="https://cdn.tailwindcss.com"></script>
 		<style>
-			:root 
-			{
+			:root {
 				--green: #2ecc71; --dark-green: #16a085; --red: #e74c3c; --dark-bg: #1a1d22;
 			}
-
-			body 
-			{ 
-				background-color: var(--dark-bg); 
-				font-family: 'Courier New', Courier, monospace; 
-				overscroll-behavior: none; 
-			}
-			
-			.terminal-glow 
-			{ 
-				text-shadow: 0 0 5px var(--green), 0 0 10px var(--green); 
-			}
-			
-			.terminal-glow-red 
-			{ 
-				text-shadow: 0 0 5px var(--red), 0 0 10px var(--red); 
-			}
-			
-			.scanlines::before 
-			{
+			body { background-color: var(--dark-bg); font-family: 'Courier New', Courier, monospace; overscroll-behavior: none; }
+			.terminal-glow { text-shadow: 0 0 5px var(--green), 0 0 10px var(--green); }
+			.terminal-glow-red { text-shadow: 0 0 5px var(--red), 0 0 10px var(--red); }
+			.scanlines::before {
 				content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
 				background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%);
 				background-size: 100% 4px;
-				animation: scan 10s linear infinite; 
-				pointer-events: none;
+				animation: scan 10s linear infinite; pointer-events: none;
 			}
-			@keyframes scan 
-			{ 
-				from { background-position: 0 0; } 
-				to { background-position: 0 -400px; } 
-			}
-			@keyframes fadeIn 
-			{ 
-				from { opacity: 0; } 
-				to { opacity: 1; } 
-			}
-			@keyframes type 
-			{ 
-				from { width: 0; } 
-				to { width: 100%; } 
-			}
+			@keyframes scan { from { background-position: 0 0; } to { background-position: 0 -400px; } }
+			@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+			@keyframes type { from { width: 0; } to { width: 100%; } }
 			.animate-fadeIn { animation: fadeIn 1s ease-out forwards; }
 			.animate-type { overflow: hidden; white-space: nowrap; animation: type 2s steps(40, end); }
-			
-			.location-btn:active 
-			{ 
-				transform: scale(0.95); 
-				box-shadow: 0 0 15px var(--dark-green); 
+			.location-btn:active { transform: scale(0.95); box-shadow: 0 0 15px var(--dark-green); }
+			.minigame-btn:active { transform: scale(0.95); }
+			.popup { transition: opacity 0.3s, transform 0.3s; }
+			@keyframes shake {
+				10%, 90% { transform: translate3d(-1px, 0, 0); }
+				20%, 80% { transform: translate3d(2px, 0, 0); }
+				30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+				40%, 60% { transform: translate3d(4px, 0, 0); }
 			}
-
-			.minigame-btn:active 
-			{ 
-				transform: scale(0.95); 
-			}
-
-			.popup 
-			{ 
-				transition: opacity 0.3s, transform 0.3s; 
-			}
+			.animate-shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
 		</style>
 	</head>
 	<body class="relative overflow-hidden">
 		<div id="app" class="h-screen w-screen scanlines"></div>
 
+		<!-- HTML templates remain the same -->
 		<template id="boot-screen-template">
 			<div class="flex flex-col items-center justify-center h-full w-full bg-black text-[var(--green)] p-4">
 				<pre class="text-xl md:text-3xl terminal-glow mb-8 animate-fadeIn">R.C.S. HYPERION</pre>
@@ -83,7 +48,6 @@
 				</div>
 			</div>
 		</template>
-		
 		<template id="main-screen-template">
 			<main class="flex flex-col h-full p-6 text-[var(--green)] animate-fadeIn">
 				<header class="border-b-2 border-[var(--green)] pb-4 text-center">
@@ -96,7 +60,6 @@
 				</div>
 			</main>
 		</template>
-		
 		<template id="minigame-password-template">
 			<div class="flex flex-col h-full p-6 text-[var(--green)] animate-fadeIn">
 				<div class="relative flex-grow flex flex-col items-center justify-center bg-black/50 border-2 border-[var(--green)] rounded-lg p-4">
@@ -107,7 +70,6 @@
 				</div>
 			</div>
 		</template>
-		
 		<template id="minigame-sequence-template">
 			<div class="flex flex-col h-full p-6 text-[var(--green)] animate-fadeIn">
 				<div class="relative flex-grow flex flex-col items-center justify-center bg-black/50 border-2 border-[var(--green)] rounded-lg p-4">
@@ -119,7 +81,6 @@
 				</div>
 			</div>
 		</template>
-		
 		<template id="solution-popup-template">
 			<div class="fixed top-4 right-4 z-50 w-11/12 max-w-sm bg-blue-900 border-2 border-blue-400 text-white rounded-lg shadow-lg p-4 opacity-0 transform translate-y-[-20px] popup">
 				<button id="popup-close-btn" class="absolute top-1 right-2 text-2xl">&times;</button>
@@ -127,39 +88,29 @@
 				<p id="solution-text" class="text-base"></p>
 			</div>
 		</template>
-		
+
+		<!-- ======================================================================== -->
+		<!-- VANILLA JAVASCRIPT APPLICATION LOGIC (C# Naming Convention) -->
+		<!-- ======================================================================== -->
 		<script>
 			// --- GLOBAL STATE ---
-			let gameState = 
-			{
+			let gameState = {
 				currentScreen: 'BOOT',
-				
-				player: 
-				{ 
-					id: 'player_123', 
-					action: null 
-				},
-				
-				minigame: 
-				{ 
-					type: null, 
-					prompt: '', 
-					solution: null 
-				},
+				player: { id: 'player_123', action: null },
+				minigame: { type: null, prompt: '', solution: null },
 			};
 			
 			// --- STATE MANAGEMENT ---
 			let subscribers = [];
 			function Subscribe(callback) 
-			{ 
-				subscribers.push(callback); 
-				callback(null, gameState); 
+			{
+				subscribers.push(callback);
+				callback(null, gameState);
 			}
-			
 			function UpdateState(updater) 
 			{
-				const oldState = { ...gameState }; // make a copy of the old state
-				gameState = updater(gameState); // runs an updated function to get new state
+				const oldState = { ...gameState };
+				gameState = updater(gameState);
 				subscribers.forEach(callback => callback(oldState, gameState));
 			}
 
@@ -168,34 +119,27 @@
 			let minigameTimer;
 			function Render(oldState, newState) 
 			{
-				if (oldState?.currentScreen !== newState.currentScreen) 
+				if (oldState?.currentScreen !== newState.currentScreen || (newState.currentScreen === 'MAIN' && oldState?.player.action !== newState.player.action)) 
 				{
 					if (window.minigameTimer) clearInterval(window.minigameTimer);
-					
 					switch (newState.currentScreen) 
 					{
-						case 'BOOT': 
-							RenderScreen('boot-screen-template'); 
-							InitBootScreen(); 
+						case 'BOOT':
+							RenderScreen('boot-screen-template');
+							InitBootScreen();
 							break;
-						case 'MAIN': 
-							RenderScreen('main-screen-template'); 
-							InitMainScreen(); 
+						case 'MAIN':
+							RenderScreen('main-screen-template');
+							InitMainScreen();
 							break;
 						case 'MINIGAME':
 							const templateId = `minigame-${newState.minigame.type.toLowerCase()}-template`;
 							RenderScreen(templateId);
-							InitMiniGame(newState.minigame);
+							InitMinigame(newState.minigame);
 							break;
 					}
-				} 
-				else if (newState.currentScreen === 'MAIN' && 
-						oldState?.player.action !== newState.player.action) 
-				{
-					InitMainScreen();
 				}
 			}
-
 			function RenderScreen(templateId) 
 			{
 				const template = document.getElementById(templateId);
@@ -220,40 +164,35 @@
 					REPAIR: 'Perform structural repairs on a damaged location.',
 					VENT: 'Vent plasma at a location to mitigate damage from an Overclock.',
 				};
-				
 				document.getElementById('player-action').textContent = gameState.player.action || 'AWAITING ASSIGNMENT';
 				document.getElementById('player-role-desc').textContent = actionDescriptions[gameState.player.action] || 'Stand by for your operational role.';
 
-				const locations = [
-					'Reactor Base', 
-					'Coolant Pool', 
-					'Power Cells', 
-					'Comms Tower'
-				];
-				
+				const locations = ['Reactor Base', 'Coolant Pool', 'Power Cells', 'Comms Tower'];
 				const buttonsContainer = document.getElementById('location-buttons');
 				buttonsContainer.innerHTML = locations.map(loc => `
 					<button data-location="${loc}" class="location-btn bg-black/30 border-2 border-[var(--green)] rounded-lg p-6 text-lg transition-all duration-200 hover:bg-[var(--green)] hover:text-black">
 						${loc}
 					</button>
 				`).join('');
-				
-				buttonsContainer.querySelectorAll('.location-btn').forEach(btn => {
-					btn.addEventListener('click', () => {
+				buttonsContainer.querySelectorAll('.location-btn').forEach(btn => 
+				{
+					btn.addEventListener('click', () => 
+					{
 						const location = btn.dataset.location;
 						SendActionToServer('start_action', { location });
 					});
 				});
 			}
 
-			function InitMiniGame(minigame) 
+			function InitMinigame(minigame) 
 			{
 				document.getElementById('minigame-prompt').textContent = minigame.prompt;
 				let timeLeft = minigame.type === 'SEQUENCE' ? 15 : 10;
 				const timerEl = document.getElementById('minigame-timer');
 				timerEl.textContent = String(timeLeft);
 
-				window.minigameTimer = setInterval(() => {
+				window.minigameTimer = setInterval(() => 
+				{
 					timeLeft--;
 					timerEl.textContent = String(timeLeft);
 					if (timeLeft <= 0) 
@@ -269,7 +208,8 @@
 				if (minigame.type === 'PASSWORD') 
 				{
 					const input = document.getElementById('password-input');
-					input.addEventListener('input', () => {
+					input.addEventListener('input', () => 
+					{
 						finalInput = input.value.toUpperCase();
 					});
 					input.focus();
@@ -284,7 +224,8 @@
 						const btn = document.createElement('button');
 						btn.textContent = String(i);
 						btn.className = 'minigame-btn bg-black/50 border-2 border-gray-600 text-2xl p-4 rounded-lg transition-colors hover:bg-gray-700';
-						btn.addEventListener('click', () => {
+						btn.addEventListener('click', () => 
+						{
 							finalInput += i;
 							display.textContent += '*';
 						});
@@ -292,7 +233,8 @@
 					}
 				}
 				
-				submitButton.addEventListener('click', () => {
+				submitButton.addEventListener('click', () => 
+				{
 					clearInterval(window.minigameTimer);
 					const success = finalInput === minigame.solution;
 					SendActionToServer('minigame_result', { success });
@@ -303,16 +245,24 @@
 			{
 				const template = document.getElementById('solution-popup-template');
 				document.body.appendChild(template.content.cloneNode(true));
-				
 				const popupEl = document.body.querySelector('.popup');
 				popupEl.querySelector('#solution-text').textContent = solutionText;
-				
-				setTimeout(() => {
+				setTimeout(() => 
+				{
 					popupEl.style.opacity = '1';
 					popupEl.style.transform = 'translateY(0)';
 				}, 10);
-				
 				popupEl.querySelector('#popup-close-btn').addEventListener('click', () => popupEl.remove());
+			}
+
+			function TriggerFailureFeedback() 
+			{
+				console.log("FEEDBACK: Triggering failure screen shake.");
+				app.classList.add('animate-shake');
+				setTimeout(() => 
+				{
+					app.classList.remove('animate-shake');
+				}, 500);
 			}
 
 			// --- GAME LOGIC & SERVER COMMUNICATION ---
@@ -321,9 +271,7 @@
 			{
 				const isPasswordGame = Math.random() > 0.5;
 				const minigameType = isPasswordGame ? 'PASSWORD' : 'SEQUENCE';
-				
 				let solution, prompt;
-				
 				if (minigameType === 'PASSWORD') 
 				{
 					const words = ['ALPHA', 'BRAVO', 'DELTA', 'GAMMA', 'OMEGA'];
@@ -335,21 +283,9 @@
 					solution = String(Math.floor(100 + Math.random() * 900));
 					prompt = 'Input Coolant Frequency Sequence:';
 				}
-				
-				return { 
-					type: minigameType, 
-					prompt, 
-					solution 
-				};
+				return { type: minigameType, prompt: prompt, solution: solution };
 			}
 			
-			
-			/**
-			 * Sends a specific action and its associated data to the server.
-			 *
-			 * @param {string} action - The name of the action to be sent (e.g., 'playerMove', 'updateScore').
-			 * @param {any} data - The data payload to be sent along with the action.
-			 */
 			function SendActionToServer(action, data) 
 			{
 				console.log(`[TO SERVER] Action: ${action}`, data);
@@ -364,27 +300,36 @@
 						...minigameData
 					});
 					
-					setTimeout(() => {
+					setTimeout(() => 
+					{
 						UpdateState(s => ({ ...s, currentScreen: 'MINIGAME', minigame: minigameData }));
 					}, 100);
+
 				} 
 				else if (action === 'minigame_result') 
 				{
-					setTimeout(() => {
+					if (!data.success) 
+					{
+						TriggerFailureFeedback();
+					}
+					
+					setTimeout(() => 
+					{
 						UpdateState(s => ({ ...s, currentScreen: 'MAIN' }));
 					}, 500);
 				}
 			}
 
 			// --- MOCK SERVER UPDATES ---
-			function FakeServerUpdates() 
+			function MockServerUpdates() 
 			{
-				setTimeout(() => {
+				setTimeout(() => 
+				{
 					console.log('[MOCK SERVER] Assigning role...');
 					UpdateState(s => ({ ...s, player: { ...s.player, action: 'REPAIR' } }));
 				}, 5000);
-				
-				setTimeout(() => {
+				setTimeout(() => 
+				{
 					console.log('[MOCK SERVER] Broadcasting solution for another player...');
 					ShowSolutionPopup('Tell Operator 2 the coolant password is "STABILIZE".');
 				}, 10000);
@@ -392,7 +337,7 @@
 
 			// --- INITIALIZATION ---
 			Subscribe(Render);
-			FakeServerUpdates();
+			MockServerUpdates();
 		</script>
 	</body>
 </html>

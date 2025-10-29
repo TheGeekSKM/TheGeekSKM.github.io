@@ -11,7 +11,7 @@
     <header class="header container">
       <nav>
         <ul class="header__menu">
-          <li><a class="header__link" href="#previous">Past Projects</a></li>
+          <li><a class="header__link" href="#previous">Shipped Titles</a></li>
           <li><a class="header__link" href="#work">Work</a></li>
           <li><a class="header__link" href="#about">About</a></li>
           <li><a class="header__link" href="#contact">Contact</a></li>
@@ -82,8 +82,10 @@
         <h2 class="hero__subtitle">Hello! I am Sai Mangipudi 🥭</h2>
         <h1 class="hero__title">GAME PROGRAMMER/<br>DESIGNER</h1>
         <p class="hero__description">I am a software developer who has <strong>over 5 years of experience</strong> in all the facets of game development, 
-          ranging from the design fundamentals <strong>(Level Design, Game Design, etc)</strong>, all the way to the software 
-          elements of game programming <strong>(Custom Physics Engine, AI Programming, etc)</strong>.</p>
+          ranging from the design fundamentals <b>(Level Design, Game Design, etc)</b>, all the way to the software 
+          elements of game programming <b>(Custom Physics Engine, AI, and UI Libraries etc)</b>. </p>
+        <p class="hero__description">I am proficient in <strong>C#, C++, Java, Python, Javascript/Typescript</strong> as well as having a large amount of experience in 
+          <strong>Game Engines</strong> <b>(Unity, Unreal, Godot, GameMaker)</b> and <strong>Frameworks</strong> <b>(Raylib, MonoGame, KaplayJS, and PixiJS)</b>.</p>
         <div class="hero__button-container">
           <a class="hero__button btn" href="https://github.com/TheGeekSKM" target="_blank">Github</a>
           <a class="hero__button btn" href="https://www.linkedin.com/in/mangopudding/" target="_blank">LinkedIn</a>
@@ -92,12 +94,90 @@
       </section>
 
       <section class="projects container section" id="previous">
-        <h2 class="projects__title">Previous and Shipped Projects</h2>
-        <p class="projects__description">These are the previous projects that I have either been a part of and have completed. 
+        <h2 class="projects__title">Shipped Titles</h2>
+        <p class="projects__description">These are the previous titles that I have worked on and have seen through all the way to completion. 
           I have worked on a variety of projects, ranging from Virtual Reality Games to Board Games, and everything in between.
         </p>
 
           <div class="projects__card-container">
+              <div class="project__card">
+              <div class="project__tags"> 
+                <span class="tag tag--unity">Unreal</span>
+                <span class="tag tag--vr">Couch Co-Op</span>
+              </div>
+              <h3 class="project__project-title">Cosmic Combat</h3>
+              <div class="projects__image-wrapper" data-tilt data-tilt-glare>
+                <img class="lazy loading" src="https://fakeimg.pl/1920x1080" data-src="./cosmicCombat.jpg" alt="Cosmic Combat">
+              </div>
+              <p class="projects__project-gameDescription">"1 to 4 Combatants from across our galaxy compete in sports of strength and agility to become the next Galactic Gladiator!"</p>
+              <p class="projects__project-gameLearning">This was my first experience as the <strong>Lead Developer</strong> on a large project with a total of up to <strong>40 developers</strong>.
+                I worked with my Project Manager to ensure that the entire team was on track and was not overwhelmed. I was also the <strong>Lead Architectural Engineer</strong> behind our
+                <strong>UI Systems</strong>, as Unreal did not natively support Controllers in it's Widgets.I truly learned, during this time, how many meetings I would have
+              to attend... </p>
+              <a href="https://utdallas.box.com/shared/static/0fo98cmltlm92zxs2mgeq6edo5k7nl53.zip" target="_blank" class="btn">Download + Play</a>
+            </div>
+
+            <div class="project__card">
+              <div class="project__tags">
+                <span class="tag tag--unreal">Unreal</span>
+                <span class="tag tag--vr">Horror</span>
+              </div>
+              <h3 class="project__project-title">Death Bloom: Arveado's Final Chapter</h3>
+              <div class="projects__image-wrapper" data-tilt data-tilt-glare>
+                <img class="lazy loading" src="https://fakeimg.pl/1920x1080" data-src="./deathbloom.png" alt="Death Bloom">
+              </div>
+              <p class="projects__project-gameDescription">"Step into the shadows of a twisted mind, where darkness reigns and secrets lurk, 
+                in this chilling first-person horror puzzle game that will haunt your every move."</p>
+              <!-- <p class="projects__project-gameLearning">This is the third game, I made for the UT Dallas Game Lab Course. This was actually 
+                the first game where we had to work with the <strong>Unreal Game Engine</strong>. Needless to say, this brought forth many challenges as we had 
+                to come to terms with the systematic differences between Unity's Prefabs and Unreal's Blueprints. Another problem we had to 
+                overcome was using Github for Version Control. Anyone who has ever worked with Unreal knows that using Github for version control 
+                is akin to trying to stuff a tiger into a fish tank.   </p> -->
+              <p class="projects__project-gameLearning">For this project, I worked on the <strong>Artificial Intelligence</strong> of the enemy. Using <strong>Unreal's 
+                Blackboard and Behavior Tree System</strong>, I was able to create a complex AI that was-for a few parts of production- genuinely too smart. 
+                Due to this, I also created a much less intelligent AI that could easily be molded to fit the current level's requirements. 
+                This was also my first time as a <strong>UI/UX programmer</strong> as well.  </p>
+              <a href="https://github.com/metalac190/GameLab_S23Game" target="_blank" class="btn">Visit Github</a>
+            </div>
+
+            <div class="project__card">
+              <div class="project__tags">
+                <span class="tag tag--unity">Unity</span>
+                <span class="tag tag--vr">Racing</span>
+              </div>
+              <h3 class="project__project-title">Tobor Quest</h3>
+              <div class="projects__image-wrapper" data-tilt data-tilt-glare>
+                <img class="lazy loading" src="https://fakeimg.pl/1920x1080" data-src="./toborquest.png" alt="Tobot Quest">
+              </div>
+              <p class="projects__project-gameDescription">"Race against time as you deliver food, all while a the behest of people far wealthier and far more well-fed than you!!"</p>
+              <p class="projects__project-gameLearning">This is the second game that I developed for UT Dallas. ToborQuest is a time 
+                trial racing game where the goal is to deliver food from the start of the level to the end of the level. For this project 
+                I was mostly in <strong>charge of backend systems designing/programming</strong>. Most of my work was not in the visual department. I created 
+                the <strong>Fracture System</strong> that would cause objects to shatter upon a certain amount of force being exerted on them. I also created 
+                a <strong>Dialogue System</strong> that allowed for skipping of dialogue, editor tools for creating dialogue that were very designer friendly, 
+                and dialogue box animations with a tweening library.  </p>
+              <a href="https://github.com/metalac190/GameLab_ToborQuest" target="_blank" class="btn">Visit Github</a>
+            </div>
+
+            <div class="project__card">
+              <div class="project__tags">
+                <span class="tag tag--unity">Unity</span>
+                <span class="tag tag--vr">Point and Click Narrative</span>
+              </div>
+              <h3 class="project__project-title">Ghost House</h3>
+              <div class="projects__image-wrapper" data-tilt data-tilt-glare>
+                <img class="lazy loading" src="https://fakeimg.pl/1920x1080" data-src="./ghostHouse.png" alt="Ghost House">
+              </div>
+              <p class="projects__project-gameDescription">"Navigate the labyrinth of grief as the departed family member in a narrative puzzle 
+                game where healing begins with every shattered piece."</p>
+              <p class="projects__project-gameLearning">This was the first game that I developed for The University of Texas at Dallas Game Production 
+                Course. I worked with a team of developers and was mainly in charge of developing a <strong>Custom Event System</strong> that did not live in scene but 
+                actually lived in the project files, allowing assets to communicate with assets in other scenes without being active in the game. On top 
+                of that, I was tasked with creating the <strong>Player Movement System</strong> which allowed for both keyboard movement in an isometric game, but also a 
+                mouse-based dragging movement system that also worked with isometric views. </p>
+              <a href="https://github.com/metalac190/GhostHouse" target="_blank" class="btn">Visit Github</a>
+            </div>
+
               <div class="project__card">
               <div class="project__tags">
                 <span class="tag tag--unity">Unity</span>
@@ -135,7 +215,7 @@
             <div class="project__card">
               <div class="project__tags">
                 <span class="tag tag--unity">Unity</span>
-                <span class="tag tag--tss">Twin Stick Shooter</span>
+                <span class="tag tag--vr">Twin Stick Shooter</span>
               </div>
               <h3 class="project__project-title">The Untitled Tavern</h3>
               <div class="projects__image-wrapper" data-tilt data-tilt-glare>
@@ -149,67 +229,6 @@
                 <strong>Content-Lock</strong>. I basically experimented with doing
               project management on my own, and consequently, learnt how to space out projects properly.</p>
               <a href="https://thegeekskm.itch.io/tutsg" target="_blank" class="btn">Visit Itch Page</a>
-            </div>
-
-            <div class="project__card">
-              <div class="project__tags">
-                <span class="tag tag--unity">Unity</span>
-                <span class="tag tag--pcn">Point and Click Narrative</span>
-              </div>
-              <h3 class="project__project-title">Ghost House</h3>
-              <div class="projects__image-wrapper" data-tilt data-tilt-glare>
-                <img class="lazy loading" src="https://fakeimg.pl/1920x1080" data-src="./ghostHouse.png" alt="Ghost House">
-              </div>
-              <p class="projects__project-gameDescription">"Navigate the labyrinth of grief as the departed family member in a narrative puzzle 
-                game where healing begins with every shattered piece."</p>
-              <p class="projects__project-gameLearning">This was the first game that I developed for The University of Texas at Dallas Game Production 
-                Course. I worked with a team of developers and was mainly in charge of developing a <strong>Custom Event System</strong> that did not live in scene but 
-                actually lived in the project files, allowing assets to communicate with assets in other scenes without being active in the game. On top 
-                of that, I was tasked with creating the <strong>Player Movement System</strong> which allowed for both keyboard movement in an isometric game, but also a 
-                mouse-based dragging movement system that also worked with isometric views. </p>
-              <a href="https://github.com/metalac190/GhostHouse" target="_blank" class="btn">Visit Github</a>
-            </div>
-
-            <div class="project__card">
-              <div class="project__tags">
-                <span class="tag tag--unity">Unity</span>
-                <span class="tag tag--racing">Racing</span>
-              </div>
-              <h3 class="project__project-title">Tobor Quest</h3>
-              <div class="projects__image-wrapper" data-tilt data-tilt-glare>
-                <img class="lazy loading" src="https://fakeimg.pl/1920x1080" data-src="./toborquest.png" alt="Tobot Quest">
-              </div>
-              <p class="projects__project-gameDescription">"Race against time as you deliver food, all while a the behest of people far wealthier and far more well-fed than you!!"</p>
-              <p class="projects__project-gameLearning">This is the second game that I developed for UT Dallas. ToborQuest is a time 
-                trial racing game where the goal is to deliver food from the start of the level to the end of the level. For this project 
-                I was mostly in <strong>charge of backend systems designing/programming</strong>. Most of my work was not in the visual department. I created 
-                the <strong>Fracture System</strong> that would cause objects to shatter upon a certain amount of force being exerted on them. I also created 
-                a <strong>Dialogue System</strong> that allowed for skipping of dialogue, editor tools for creating dialogue that were very designer friendly, 
-                and dialogue box animations with a tweening library.  </p>
-              <a href="https://github.com/metalac190/GameLab_ToborQuest" target="_blank" class="btn">Visit Github</a>
-            </div>
-
-            <div class="project__card">
-              <div class="project__tags">
-                <span class="tag tag--unreal">Unreal</span>
-                <span class="tag tag--horror">Horror</span>
-              </div>
-              <h3 class="project__project-title">Death Bloom: Arveado's Final Chapter</h3>
-              <div class="projects__image-wrapper" data-tilt data-tilt-glare>
-                <img class="lazy loading" src="https://fakeimg.pl/1920x1080" data-src="./deathbloom.png" alt="Death Bloom">
-              </div>
-              <p class="projects__project-gameDescription">"Step into the shadows of a twisted mind, where darkness reigns and secrets lurk, 
-                in this chilling first-person horror puzzle game that will haunt your every move."</p>
-              <p class="projects__project-gameLearning">This is the third game, I made for the UT Dallas Game Lab Course. This was actually 
-                the first game where we had to work with the <strong>Unreal Game Engine</strong>. Needless to say, this brought forth many challenges as we had 
-                to come to terms with the systematic differences between Unity's Prefabs and Unreal's Blueprints. Another problem we had to 
-                overcome was using Github for Version Control. Anyone who has ever worked with Unreal knows that using Github for version control 
-                is akin to trying to stuff a tiger into a fish tank.   </p>
-              <p class="projects__project-gameLearning">For this project, I worked on the <strong>Artificial Intelligence</strong> of the enemy. Using <strong>Unreal's 
-                Blackboard and Behavior Tree System</strong>, I was able to create a complex AI that was-for a few parts of production- genuinely too smart. 
-                Due to this, I also created a much less intelligent AI that could easily be molded to fit the current level's requirements. 
-                This was also my first time as a <strong>UI/UX programmer</strong> as well.  </p>
-              <a href="https://github.com/metalac190/GameLab_S23Game" target="_blank" class="btn">Visit Github</a>
             </div>
 
             <div class="project__card">
@@ -302,12 +321,10 @@
               <div class="work__card__left">
                 <h3 class="work__name">Prop Closet Studio Lead Developer</h3>
                  <img class="lazy loading work__img" src="https://fakeimg.pl/1280x720" data-src="/JOB_PropClosetPodcast.png" alt="" class="work__img"  data-tilt data-tilt-glare>
-                <p class="work__date">June 2024 - Present</p>
+                <p class="work__date">June 2024 - July 2025</p>
               </div>
-              <p class="work__description">I work as the <strong>Lead Developer for Prop Closet Studio</strong>, where I am responsible for managing the development of our games, 
-                as well as creating the core gameplay mechanics and systems for our games. I also work with the team to ensure that the game is 
-                running smoothly and that all the features are implemented correctly. I work remotely with the team and we have weekly meetings to ensure that the 
-                current projects we have are on track and match the vision we have for the game. </p>
+              <p class="work__description">I work as the <strong>Lead Developer for a startup called Prop Closet Studio</strong>, where I was responsible for managing the development of games as well as other forms of digital media and interactive fiction. 
+               I also worked with the team to ensure that the game(s) were running smoothly and that all the features were implemented correctly. I worked remotely with the team and we had weekly meetings to ensure that the current projects we had were on track and match the vision we had for the game. </p>
             </div>
 
             <div class="work__card">
@@ -323,11 +340,11 @@
 
             <div class="work__card">
               <div class="work__card__left">
-                <h3 class="work__name">KD College Prep Administrative Intern</h3>
+                <h3 class="work__name">KD College Prep Administrative Assistant</h3>
                 <img class="lazy loading work__img" src="https://fakeimg.pl/1280x720" data-src="/JOB_KDCollegePrep.png" alt="" class="work__img" data-tilt data-tilt-glare>
                 <p class="work__date">March 2023 - Present</p>
               </div>
-              <p class="work__description">I work as an <strong>Administrative Intern at KD College Prep</strong>, where I manage the front desk, 
+              <p class="work__description">I work as an <strong>Administrative Assistant at KD College Prep</strong>, where I manage the front desk, 
                 answer phone calls, and assist students with their questions. I mainly work with the database software, and I am tasked with managing
                 the student information and ensuring that all the data was up to date. </p>
             </div>
@@ -352,8 +369,6 @@
             my main roles have always been as a <strong>Game Programmer</strong> or <strong>Game Designer</strong>.</p>
           <p class="about__description">Thanks to my education at the <strong>University of Texas at Dallas</strong>, I have been able to make several completed games in a company setting, where I 
             was able to work with a team of developers to create a game from scratch.</p>
-          <p class="about__description">I currently work as the Lead Developer for a indie games studio called Prop Closet Studio, and am currently developing a VR Action Roguelike called
-            <a href="#current">The Untitled Tavern: Redux Edition</a>.</p>
           <p class="about__description">I also run a YouTube Channel called <a href="https://www.youtube.com/@mangopudding7245" target="_blank">MangoPudding</a> where I constantly post updates on progress in my game development journey, along with other content related to
             game/film creation.
           </p>
@@ -361,15 +376,15 @@
           <h3 class="about__subtitle">Technologies</h3>
           <div class="about__ul-container">
             <ul class="about__ul">
-              <li class="about__list">Version Control (Git, GitHub, GitLabs, Perforce)</li>
-              <li class="about__list">Game Engines (Unreal, Unity, Godot, GameMaker Studio, Armory)</li>
-              <li class="about__list">Game Frameworks (XNA, MonoGame, RayLib, PyGame)</li>
+              <li class="about__list">Version Control <b>(Git, GitHub, GitLabs, Perforce)</b></li>
+              <li class="about__list">Game Engines <b>(Unreal, Unity, Godot, GameMaker Studio, Armory)</b></li>
+              <li class="about__list">Game Frameworks <b>(XNA, MonoGame, RayLib, KaplyJS, PixiJS, PyGame)</b></li>
             </ul>
 
             <ul class="about__ul">
-              <li class="about__list">3D Software (Maya, Blender)</li>
-              <li class="about__list">Programming Languages (C++, C#, Java, Python, HTML, CSS, Javascript)</li>
-              <li class="about__list">Tools Development (Maya Python API, Blender Python API, PySide2)</li>
+              <li class="about__list">3D Software <b>(Maya, Blender)</b></li>
+              <li class="about__list">Programming Languages <b>(C++, C#, Java, Python, HTML, CSS, Javascript/Typescript)</b></li>
+              <li class="about__list">Tools Development <b>(Maya Python API, Blender Python API, Perforce CLI Tooling, PySide2, Qt)</b></li>
             </ul>
           </div>
           
